@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { getHeaderTitle } from '@react-navigation/elements';
 import { NavigationContainer } from '@react-navigation/native';
 import Elso from './Elso';
 import Konyv from './Konyv'
 
 function HomeScreen({ navigation }) {
   return (
-<View style={{flex:1,
-      flexDirection: "column"
-    }}>
-      <View style={{ flex: 1, backgroundColor: "red" }} />
-      <View style={{ flex: 1, backgroundColor: "darkorange" }} />
-      <View style={{ flex: 1, backgroundColor: "green" }} />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
     </View>
   );
 }
@@ -39,11 +37,10 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer >
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home" screenOptions={{ drawerActiveBackgroundColor:'#ccb399',drawerActiveTintColor:'#201b17',headerStyle:{backgroundColor:'#f3ece5',height:100},drawerStyle:{backgroundColor: '#f3ece5', width: 300} 
-      }} >
-        <Drawer.Screen name="Főoldal" component={HomeScreen} />
-        <Drawer.Screen name="Értesítések" component={NotificationsScreen} />
+    <NavigationContainer>
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
         <Drawer.Screen name="Első menü" component={Elso_lap} />
         <Drawer.Screen name="Minden könyv" component={Konyv_lap} />
       </Drawer.Navigator>

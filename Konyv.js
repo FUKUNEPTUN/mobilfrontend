@@ -31,11 +31,12 @@ export default class App extends Component {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1, paddingTop: 35, paddingLeft: 10 }}>
+      <View style={{ flex: 1}}>
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
             renderItem={({ item }) => (
+              <View style={{flex:1}}>
               <View style={{borderColor:"blue", borderWidth:2}}>
                 <Image style={{ alignSelf: 'center', width: 200, height: 300 }} source={{ uri: 'http://192.168.6.12:3000/' + item.konyv_kep}} />
                 <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_kep}</Text>
@@ -44,6 +45,7 @@ export default class App extends Component {
                 <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.mufaj_nev}</Text>
                 <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_oldalszam}</Text>
                 <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_kiadaseve}</Text>
+              </View>
               </View>
 
             )}
