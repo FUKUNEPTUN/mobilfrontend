@@ -8,12 +8,13 @@ export default class App extends Component {
     this.state = {
       data: [],
       isLoading: true,
+      katt:true
     };
   }
 
   async getKonyv() {
     try {
-      const response = await fetch('http://192.168.6.12:3000/konyv');
+      const response = await fetch('http://192.168.6.12:3000/iro');
       const json = await response.json();
       this.setState({ data: json });
     } catch (error) {
@@ -37,15 +38,12 @@ export default class App extends Component {
             data={data}
             renderItem={({ item }) => (
               <View style={{flex:1}}>
+              <TouchableOpacity>
               <View style={{borderColor:"blue", borderWidth:2}}>
-                <Image style={{ alignSelf: 'center', width: 200, height: 300 }} source={{ uri: 'http://192.168.6.12:3000/' + item.konyv_kep}} />
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_kep}</Text>
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_nev}</Text>
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.iro_nev}</Text>
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.mufaj_nev}</Text>
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_oldalszam}</Text>
-                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred' }}>{item.konyv_kiadaseve}</Text>
+                <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom:15 }}>{item.iro_neve}</Text>
+                {2+1==3?<Text/>:<Text style={{ textAlign: 'center', fontSize: 15, color: 'darkred',paddingBottom:15}}>{item.iro_leiras}</Text>}
               </View>
+              </TouchableOpacity>
               </View>
 
             )}

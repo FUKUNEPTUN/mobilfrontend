@@ -45,7 +45,7 @@ export default function App() {
         <Drawer.Screen name="Főoldal" component={HomeScreen} />
         <Drawer.Screen name="Értesítések" component={NotificationsScreen} />
         <Drawer.Screen name="Első menü" component={Elso_lap} />
-        <Drawer.Screen name="Minden könyv" component={Konyv_lap} />
+        <Drawer.Screen name="Írók" component={Konyv_lap} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
