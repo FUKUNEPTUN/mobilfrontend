@@ -40,7 +40,7 @@ const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <NavigationContainer >
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home" screenOptions={{ drawerActiveBackgroundColor:'#ccb399',drawerActiveTintColor:'#201b17',headerStyle:{backgroundColor:'#f3ece5',height:100},drawerStyle:{backgroundColor: '#f3ece5', width: 300} 
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Home" screenOptions={{drawerActiveBackgroundColor:'#ccb399',drawerActiveTintColor:'#201b17',headerStyle:{backgroundColor:'#f3ece5'},drawerStyle:{backgroundColor: '#f3ece5', width: 300} 
       }} >
         <Drawer.Screen name="Főoldal" component={HomeScreen} />
         <Drawer.Screen name="Értesítések" component={NotificationsScreen} />
