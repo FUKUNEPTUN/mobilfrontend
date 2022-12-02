@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import Iroprofil from './Iroprofil'
 const IP = require('./IPcim')
 
 export default class App extends Component {
@@ -9,10 +8,7 @@ export default class App extends Component {
 
     this.state = {
       data: [],
-      datauzenet: [],
       isLoading: true,
-      katt: true,
-      iroID: 1
     };
   }
 
@@ -33,7 +29,7 @@ export default class App extends Component {
     //uzenet backend végpont meghívása
     try {
       let adatok = {
-        bevitel1: valamiid
+        bevitel1: iroID
       }
       const response = await fetch(IP.ipcim + 'irokonyv',
         {
@@ -80,6 +76,15 @@ export default class App extends Component {
             )}
           />
         )}
+        <FlatList
+          data={this.state.datauzenet}
+          renderItem={({ item }) => (
+            <View style={{ backgroundColor: "green", margin: 10, padding: 10, borderRadius: 5 }}>
+              <Text style={{ color: "white" }}>{item.konyv_cime}</Text>
+              <Text style={{ color: "lighblue" }}>{item.kp_leiras}</Text>
+            </View>
+          )}
+        />
       </View>
     );
   }

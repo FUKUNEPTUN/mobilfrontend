@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Button, View } from 'react-native';
+import { Button, View,ActivityIndicator, FlatList, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getHeaderTitle } from '@react-navigation/elements';
 import { NavigationContainer } from '@react-navigation/native';
 import Elso from './Elso';
 import Konyv from './Konyv'
+
 
 function HomeScreen({ navigation }) {
   return (
