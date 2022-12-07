@@ -3,7 +3,8 @@ import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Elso from './Elso';
-import Konyv from './Konyv'
+import Iro from './Iro'
+import Iroprofil from './Iroprofil'
 
 function HomeScreen({ navigation }) {
   return (
@@ -19,7 +20,7 @@ function HomeScreen({ navigation }) {
 function NotificationsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+      
     </View>
   );
 }
@@ -28,21 +29,25 @@ function Elso_lap({ navigation }) {
 <Elso/>
   );
 }
-function Konyv_lap({ navigation }) {
+function Iropf({ navigation }) {
   return (
-<Konyv/>
+<Iroprofil/>
+  );
+}
+function Iro_lap({ navigation }) {
+  return (
+<Iro/>
   );
 }
 const Drawer = createDrawerNavigator();
-
 export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-        <Drawer.Screen name="Első menü" component={Elso_lap} />
-        <Drawer.Screen name="Minden könyv" component={Konyv_lap} />
+        <Drawer.Screen name="Elso" options={{ title: 'Első oldal' }} component={Elso_lap} />
+        <Drawer.Screen name="Irok" options={{ title: 'Írók' }} component={Iro_lap} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
