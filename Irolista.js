@@ -67,9 +67,9 @@ export default class App extends Component {
             data={data}
             renderItem={({ item }) => (
               <View style={{ flex: 1 }}>
-                <TouchableOpacity onPress={() => this.kattintas(item.iro_id)}>
+                <TouchableOpacity           onPress={()=>this.props.navigation.navigate('Iroprofil',{aktualid:item.iro_id})}>
                   <View style={{ borderColor: "blue", borderWidth: 2 }}>
-                    <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center' }} />
+                    <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 150, height: 150, alignSelf: 'center' }} />
                     <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
                     {/* <Text style={{ textAlign: 'center', fontSize: 15, color: 'darkred',paddingBottom:15}}>{item.iro_leiras}</Text> */}
                   </View>

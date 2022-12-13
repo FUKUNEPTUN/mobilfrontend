@@ -44,7 +44,6 @@ export default class App extends Component {
   }
   konyv = async (valamiid) => {
     //uzenet backend végpont meghívása
-    alert(valamiid)
     try {
       let adatok = {
         bevitel1: valamiid
@@ -66,6 +65,9 @@ export default class App extends Component {
       this.setState({ isLoading: false });
     }
   }
+  componentDidMount() {
+    this.kattintas(this.props.route.params.aktualid);
+  }
 
 
   render() {
@@ -73,19 +75,13 @@ export default class App extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View>
-          <TextInput onChangeText={(beirtszoveg) => this.setState({ inn: beirtszoveg })}></TextInput>
-          <TouchableOpacity onPress={() => this.kattintas(this.state.inn)}>
-            <Text>Keress</Text>
-          </TouchableOpacity>
-        </View>
         <FlatList
           data={datauzenet}
           renderItem={({ item }) => (
             <View style={{ flex: 1 }}>
-              <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center' }} />
+              <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center',borderRadius:75 }} />
               <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
-              <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15 }}>{item.iro_leiras}</Text>
+              <Text style={{fontSize: 15,margin:15, paddingBottom: 15 }}>{item.iro_leiras}</Text>
               <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15 }}>Könyvei</Text>
               <FlatList
                 data={datauzenet2}

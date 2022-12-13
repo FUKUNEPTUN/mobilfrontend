@@ -52,7 +52,7 @@ export default function App() {
   component={Root}
   options={{ headerShown: false }}
 />
-<Stack.Screen name="Iroprofil" component={Iroprofil} />
+<Stack.Screen name="Iroprofil" component={Iroprofil} options={{title:"Író profilja"}} />
 </Stack.Navigator>
 </NavigationContainer>
 
