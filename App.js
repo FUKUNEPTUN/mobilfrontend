@@ -1,81 +1,60 @@
-import { Button, View,ActivityIndicator, FlatList, Text } from 'react-native';
+import * as React from 'react';
+import { Button, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import Elso from './Elso';
-import Iro from './Iro'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Iroprofil from './Iroprofil'
+import Irolista from './Irolista'
+import { NavigationContainer } from '@react-navigation/native';
 
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        onPress={() => navigation.navigate('Notifications')}
+        onPress={() => navigation.navigate('Iroprofil')}
         title="Go to notifications"
       />
     </View>
   );
 }
-
-function NotificationsScreen({ navigation }) {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  const getMovies = async () => {
-     try {
-      const response = await fetch('https://reactnative.dev/movies.json');
-      const json = await response.json();
-      setData(json.movies);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getMovies();
-  }, []);
-
+function Irolista_lap({ navigation }) {
   return (
-    <View style={{ flex: 1, padding: 24 }}>
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            <Text>{item.title}, {item.releaseYear}</Text>
-          )}
-        />
-      )}
+    <Irolista navigation={navigation}/>
+  );
+}
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   );
 }
-function Elso_lap({ navigation }) {
+
+function Root({ navigation }) {
   return (
-<Elso/>
-  );
-}
-function Iropf({ navigation }) {
-  return (
-<Iroprofil/>
-  );
-}
-function Iro_lap({ navigation }) {
-  return (
-<Iro/>
+
+<Drawer.Navigator initialRouteName="Home">
+  <Drawer.Screen name="Home" component={HomeScreen} />
+  <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+  <Drawer.Screen name="Minden író" component={Irolista_lap} />
+</Drawer.Navigator>
+
   );
 }
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator()
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-        <Drawer.Screen name="Elso" options={{ title: 'Első oldal' }} component={Elso_lap} />
-        <Drawer.Screen name="Irok" options={{ title: 'Írók' }} component={Iro_lap} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+<NavigationContainer>
+<Stack.Navigator>
+<Stack.Screen
+  name="Root"
+  component={Root}
+  options={{ headerShown: false }}
+/>
+<Stack.Screen name="Iroprofil" component={Iroprofil} />
+</Stack.Navigator>
+</NavigationContainer>
+
   );
 }
