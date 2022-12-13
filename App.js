@@ -1,24 +1,27 @@
 import * as React from 'react';
 import { Button, View,ActivityIndicator, FlatList, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { getHeaderTitle } from '@react-navigation/elements';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Iroprofil from './Iroprofil'
+import Irolista from './Irolista'
 import { NavigationContainer } from '@react-navigation/native';
-import Elso from './Elso';
-import Konyv from './Konyv'
 
 
 function HomeScreen({ navigation }) {
   return (
-<View style={{flex:1,
-      flexDirection: "column"
-    }}>
-      <View style={{ flex: 1, backgroundColor: "red" }} />
-      <View style={{ flex: 1, backgroundColor: "darkorange" }} />
-      <View style={{ flex: 1, backgroundColor: "green" }} />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Iroprofil')}
+        title="Go to notifications"
+      />
     </View>
   );
 }
-
+function Irolista_lap({ navigation }) {
+  return (
+    <Irolista navigation={navigation}/>
+  );
+}
 function NotificationsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -26,28 +29,33 @@ function NotificationsScreen({ navigation }) {
     </View>
   );
 }
-function Elso_lap({ navigation }) {
+
+function Root({ navigation }) {
   return (
-<Elso/>
-  );
-}
-function Konyv_lap({ navigation }) {
-  return (
-<Konyv/>
+
+<Drawer.Navigator initialRouteName="Home">
+  <Drawer.Screen name="Home" component={HomeScreen} />
+  <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+  <Drawer.Screen name="Minden író" component={Irolista_lap} />
+</Drawer.Navigator>
+
   );
 }
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer >
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home" screenOptions={{drawerActiveBackgroundColor:'#ccb399',drawerActiveTintColor:'#201b17',headerStyle:{backgroundColor:'#f3ece5'},drawerStyle:{backgroundColor: '#f3ece5', width: 300} 
-      }} >
-        <Drawer.Screen name="Főoldal" component={HomeScreen} />
-        <Drawer.Screen name="Értesítések" component={NotificationsScreen} />
-        <Drawer.Screen name="Első menü" component={Elso_lap} />
-        <Drawer.Screen name="Írók" component={Konyv_lap} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+<NavigationContainer>
+<Stack.Navigator>
+<Stack.Screen
+  name="Root"
+  component={Root}
+  options={{ headerShown: false }}
+/>
+<Stack.Screen name="Iroprofil" component={Iroprofil} options={{title:"Író profilja"}} />
+</Stack.Navigator>
+</NavigationContainer>
+
   );
 }
