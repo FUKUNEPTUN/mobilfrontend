@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button,Pressable } from 'react-native';
 const IP = require('./IPcim')
 
 
@@ -15,6 +15,10 @@ export default class App extends Component {
       datauzenet2: [],
       iroid: '0'
     };
+  }
+  tobb = ()=>{
+    
+    this.state.katt?this.setState({katt:false}):this.setState({katt:true})
   }
   kattintas = async (valamiid) => {
     this.setState({ iroid: valamiid })
@@ -71,7 +75,7 @@ export default class App extends Component {
 
 
   render() {
-    const { data, isLoading, datauzenet, datauzenet2 } = this.state;
+    const { data,katt, isLoading, datauzenet, datauzenet2 } = this.state;
 
     return (
       <View style={{ flex: 1 }}>
@@ -81,7 +85,9 @@ export default class App extends Component {
             <View style={{ flex: 1 }}>
               <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center',borderRadius:75 }} />
               <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
-              <Text style={{fontSize: 15,margin:15, paddingBottom: 15 }}>{item.iro_leiras}</Text>
+              <Pressable  onPress={()=>this.tobb()}>
+              {this.state.katt?<Text style={{fontSize: 15,margin:15, paddingBottom: 15,alignSelf:'center',textAlignVertical:'center'  }}>{item.iro_leiras.substring(0,300)} ...Tovább</Text>:<Text style={{fontSize: 15,margin:15, paddingBottom: 15,alignSelf:'center',textAlignVertical:'center' }}>{item.iro_leiras}</Text>}
+              </Pressable>
               <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15 }}>Könyvei</Text>
               <FlatList
                 data={datauzenet2}
