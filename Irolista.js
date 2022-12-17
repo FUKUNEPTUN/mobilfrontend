@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 const IP = require('./IPcim')
 
 
@@ -12,7 +12,7 @@ export default class App extends Component {
       isLoading: true,
       katt: true,
       datauzenet: [],
-      iroid:0
+      iroid: 0
     };
   }
   kattintas = async (valamiid) => {
@@ -42,6 +42,7 @@ export default class App extends Component {
   }
   async getKonyv() {
     try {
+      this.setState({ isLoading: true })
       const response = await fetch(IP.ipcim + 'iro');
       const json = await response.json();
       this.setState({ data: json });
@@ -58,31 +59,36 @@ export default class App extends Component {
 
 
   render() {
-    const { data, isLoading,datauzenet } = this.state;
+    const { data, isLoading, datauzenet } = this.state;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}>
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
             renderItem={({ item }) => (
               <View style={{ flex: 1 }}>
-                <TouchableOpacity           onPress={()=>this.props.navigation.navigate('Iroprofil',{aktualid:item.iro_id})}>
-                  <View style={{ borderColor: "blue", borderWidth: 2 }}>
-                    <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 150, height: 150, alignSelf: 'center' }} />
-                    <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
-                    {/* <Text style={{ textAlign: 'center', fontSize: 15, color: 'darkred',paddingBottom:15}}>{item.iro_leiras}</Text> */}
+                <Pressable onPress={() => this.props.navigation.navigate('Iroprofil', { aktualid: item.iro_id})}>
+                  <View style={{flexDirection: "row",paddingTop:5,paddingBottom:5}}>
+                    <View style={{ flex: 1  }}><Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width:60, height: 60, borderRadius: 75, alignSelf: 'center' }} /></View>
+                    <View style={{ flex: 2 }}><Text style={{fontSize: 25, color: '#4f0101',textAlignVertical:'center', height:60 }}>{item.iro_neve}</Text></View>
                   </View>
-                </TouchableOpacity>
-                <FlatList
-            data={datauzenet}
-            renderItem={({ item }) => (
-              <View style={{ flex: 1 }}>
-                 <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.konyv_cime}</Text>
-              </View>
+                  <View style={{
+                    flex: 1, flexDirection: "row"
+                  }}>
+                    
 
-            )}
-          />
+                  </View>
+                </Pressable>
+                <FlatList
+                  data={datauzenet}
+                  renderItem={({ item }) => (
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.konyv_cime}</Text>
+                    </View>
+
+                  )}
+                />
               </View>
 
             )}
