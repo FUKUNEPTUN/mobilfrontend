@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
-const IP = require('./IPcim')
+const IP = require('../pages/IPcim')
+
 
 
 export default class App extends Component {
@@ -9,38 +10,14 @@ export default class App extends Component {
 
     this.state = {
       data: [],
-      isLoading: true,
+      isLoading: false,
       katt: true,
       datauzenet: [],
       iroid: 0
     };
   }
-  kattintas = async (valamiid) => {
-    this.setState({ iroid: valamiid })
-    alert(valamiid)
-    //uzenet backend végpont meghívása
-    try {
-      let adatok = {
-        bevitel1: valamiid
-      }
-      const response = await fetch(IP.ipcim + 'iroprofil',
-        {
-          method: "POST",
-          body: JSON.stringify(adatok),
-          headers: { "Content-type": "application/json; charset=UTF-8" }
-        }
-      );
-      const json = await response.json();
-      //alert(JSON.stringify(json))
-      //console.log(json)
-      this.setState({ datauzenet: json });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  }
-  async getKonyv() {
+
+  async getIro() {
     try {
       this.setState({ isLoading: true })
       const response = await fetch(IP.ipcim + 'iro');
@@ -54,7 +31,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getKonyv();
+    this.getIro();
   }
 
 
@@ -80,17 +57,7 @@ export default class App extends Component {
 
                   </View>
                 </Pressable>
-                <FlatList
-                  data={datauzenet}
-                  renderItem={({ item }) => (
-                    <View style={{ flex: 1 }}>
-                      <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.konyv_cime}</Text>
-                    </View>
-
-                  )}
-                />
               </View>
-
             )}
           />
         )}

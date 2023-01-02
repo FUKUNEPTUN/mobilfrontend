@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import Iroprofil from './Iroprofil'
+import Iroprofil from './pages/Iroprofil'
 const IP = require('./IPcim')
 
 export default class App extends Component {
