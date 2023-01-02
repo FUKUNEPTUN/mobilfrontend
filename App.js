@@ -57,10 +57,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
           name="Roo2t"
           component={Login_lap}
-        />
+        /> */}
         <Stack.Screen
           name="Root"
           component={Root}
