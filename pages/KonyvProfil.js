@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
-
-
-
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +20,6 @@ export default class App extends Component {
 
         this.state.katt ? this.setState({ katt: false }) : this.setState({ katt: true })
     }
-
     konyv = async (valamiid) => {
         this.setState({ konyvid: valamiid })
         alert(valamiid)

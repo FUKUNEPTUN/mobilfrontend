@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { ActivityIndicator, FlatList, Text,SafeAreaView, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Iroprofil from './pages/Iroprofil'
 const IP = require('./IPcim')
 
@@ -60,7 +60,7 @@ export default class App extends Component {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
@@ -80,7 +80,7 @@ export default class App extends Component {
             )}
           />
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 };

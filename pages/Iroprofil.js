@@ -74,6 +74,7 @@ export default class App extends Component {
   }
   componentDidMount() {
     this.iroProfil(this.props.route.params.aktualid);
+
   }
 
 
