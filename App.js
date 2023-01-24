@@ -9,6 +9,7 @@ import Fooldal from './pages/Fooldal';
 import Login from './pages/Login';
 import KonyvProfil from './pages/KonyvProfil';
 import TagProfil from './pages/TagProfil';
+import Loading from './pages/Loading'
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,6 +17,7 @@ const isLogin = async (isLogin) => {
   try {
     const value = await AsyncStorage.getItem(isLogin)
     if(value !== null) {
+      alert(value)
       // value previously stored
     }
   } catch(e) {
@@ -25,6 +27,11 @@ const isLogin = async (isLogin) => {
 function HomeScreen({ navigation }) {
   return (
     <Fooldal />
+  );
+}
+function Loading_lap({ navigation }) {
+  return (
+    <Loading/>
   );
 }
 function Irolista_lap({ navigation }) {
@@ -73,15 +80,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-       {false?<Stack.Screen
-          name="Roo2t"
-          component={Login_lap}
-        /> :
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />}
+      {false? true?<Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }}/> :<Stack.Screen name="Root" component={Root} options={{ headerShown: false }}/>: <Stack.Screen name='Loading_lap'  component={Loading_lap} />}
+      
         <Stack.Screen name='Mufajkonyv'  component={Mufajkonyv} />
         <Stack.Screen name='KonyvProfil' component={KonyvProfil} />
         <Stack.Screen name='TagProfil' component={TagProfil} />

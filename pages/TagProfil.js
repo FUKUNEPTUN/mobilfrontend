@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button, Pressable, SafeAreaView, ScrollView } from 'react-native';
-import KonyvProfil from './KonyvProfil'
-
+import { ActivityIndicator, Text, View, Image, Modal, StyleSheet, Pressable, SafeAreaView, ScrollView } from 'react-native';
 const IP = require('../pages/IPcim')
-
-
-
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +11,7 @@ export default class App extends Component {
             katt: true,
             datauzenet: [],
             datauzenet2: [],
-            iroid: '0'
+            tagprofil: '0'
         };
     }
     tobb = () => {
@@ -24,11 +19,11 @@ export default class App extends Component {
         this.state.katt ? this.setState({ katt: false }) : this.setState({ katt: true })
     }
     iroProfil = async (valamiid) => {
-        this.setState({ iroid: valamiid })
+        this.setState({ tagprofil: valamiid })
         //uzenet backend végpont meghívása
         try {
             let adatok = {
-                bevitel1: valamiid
+                tagprofilid: valamiid
             }
             const response = await fetch(IP.ipcim + 'tagprofil',
                 {
@@ -48,14 +43,14 @@ export default class App extends Component {
         }
         this.konyv(valamiid)
     }
-componentDidMount(){
-
-}
+    componentDidMount() {
+        this.iroProfil(1)
+    }
     konyv = async (valamiid) => {
         //uzenet backend végpont meghívása
         try {
             let adatok = {
-                bevitel1: valamiid
+                tagprofilid: valamiid
             }
             const response = await fetch(IP.ipcim + 'tagprofilkonyv',
                 {
@@ -74,11 +69,13 @@ componentDidMount(){
             this.setState({ isLoading: false });
         }
     }
-    updateFoglalas = async (valamiid) => {
+    updateFoglalas = async (tagprofilid, kolcsid) => {
         //uzenet backend végpont meghívása
+        alert(kolcsid)
         try {
             let adatok = {
-                bevitel1: valamiid
+                tagprofilid: tagprofilid,
+                kolcsid: kolcsid
             }
             const response = await fetch(IP.ipcim + 'foglalasupdate',
                 {
@@ -121,14 +118,38 @@ componentDidMount(){
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet2.map(item =>
                             <View style={{ flex: 1, backgroundColor: 'white' }}>
-                                <Pressable onPress={() => this.updateFoglalas()}>
-                                <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_kezdet.substring(0, 10) + "-től " + item.k_lejar.substring(0, 10) + "-ig"}</Text>
-
+                                <Pressable onPress={() => this.updateFoglalas(item.tp_id, item.k_id)}>
+                                    <Text>{item.k_id}</Text>
+                                    <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_kezdet.substring(0, 10) + "-től " + item.k_lejar.substring(0, 10) + "-ig"}</Text>
                                     <Text>Módosit</Text>
                                 </Pressable>
                             </View>
                         )
                     )}
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                            this.setState({ modalVisible: !modalVisible });
+                        }}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>Hello World!</Text>
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => this.setState({ modalVisible: !modalVisible })}>
+                                    <Text style={styles.textStyle}>Hide Modal</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </Modal>
+                    <Pressable
+                        style={[styles.button, styles.buttonOpen]}
+                        onPress={() => this.setState({ modalVisible: true })}>
+                        <Text style={styles.textStyle}>Show Modal</Text>
+                    </Pressable>
                 </ScrollView>
             </SafeAreaView>
         );
