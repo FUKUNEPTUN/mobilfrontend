@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View,ScrollView, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const isLogin = async (isLogin) => {
-  try {
-    const value = await AsyncStorage.getItem(isLogin)
-    if(value !== null) {
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
 const storeData = async (value) => {
   alert(value)
   try {

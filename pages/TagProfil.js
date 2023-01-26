@@ -18,7 +18,7 @@ export default class App extends Component {
 
         this.state.katt ? this.setState({ katt: false }) : this.setState({ katt: true })
     }
-    iroProfil = async (valamiid) => {
+    tagProfil = async (valamiid) => {
         this.setState({ tagprofil: valamiid })
         //uzenet backend végpont meghívása
         try {
@@ -44,7 +44,7 @@ export default class App extends Component {
         this.konyv(valamiid)
     }
     componentDidMount() {
-        this.iroProfil(1)
+        this.tagProfil(1)
     }
     konyv = async (valamiid) => {
         //uzenet backend végpont meghívása
@@ -95,7 +95,7 @@ export default class App extends Component {
         }
     }
     componentDidMount() {
-        this.iroProfil(1);
+        this.tagProfil(1);
     }
 
 

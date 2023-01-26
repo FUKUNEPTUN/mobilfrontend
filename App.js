@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, View, ActivityIndicator, FlatList, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,17 +13,6 @@ import Loading from './pages/Loading'
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const isLogin = async (isLogin) => {
-  try {
-    const value = await AsyncStorage.getItem(isLogin)
-    if(value !== null) {
-      alert(value)
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
 function HomeScreen({ navigation }) {
   return (
     <Fooldal />
@@ -31,7 +20,7 @@ function HomeScreen({ navigation }) {
 }
 function Loading_lap({ navigation }) {
   return (
-    <Loading/>
+    <Loading />
   );
 }
 function Irolista_lap({ navigation }) {
@@ -73,22 +62,47 @@ function Root({ navigation }) {
     </Drawer.Navigator>
   );
 }
+
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator()
-
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-      {false? true?<Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }}/> :<Stack.Screen name="Root" component={Root} options={{ headerShown: false }}/>: <Stack.Screen name='Loading_lap'  component={Loading_lap} />}
-      
-        <Stack.Screen name='Mufajkonyv'  component={Mufajkonyv} />
-        <Stack.Screen name='KonyvProfil' component={KonyvProfil} />
-        <Stack.Screen name='TagProfil' component={TagProfil} />
-        <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
+  const [isLoading, setLoading] = useState(false);
+  const [isLogin1, setLogin1] = useState(false);
+  const isLogin = async (isLogin) => {
+    try {
+      const value = await AsyncStorage.getItem(isLogin)
+      if (value !== null) {
+        if (value == "igen") {
 
-      </Stack.Navigator>
-    </NavigationContainer>
+          setLogin1(false)
+        }
+        else {
+          setLogin1(true)
+        }
+      }
+    } catch (e) {
+      // error reading value
+    }
+    finally {
+      setLoading(true);
+    }
+  }
+  
+    isLogin("@bejelentkezve")
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
 
-  );
+          <Stack.Screen name='Mufajkonyv' component={Mufajkonyv} />
+          <Stack.Screen name='KonyvProfil' component={KonyvProfil} />
+          <Stack.Screen name='TagProfil' component={TagProfil} />
+          <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+
+    );
+  
+
 }

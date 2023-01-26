@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, ScrollView, View, Text, FlatList, ActivityIndicator, Pressable, Image } from 'react-native';
+import { Button, StyleSheet, ScrollView, View, Text, FlatList, ActivityIndicator, Pressable, Image, TouchableOpacity } from 'react-native';
 const IP = require('../pages/IPcim')
 
 
@@ -35,11 +35,24 @@ export default class App extends Component {
 
     render() {
         const { data, isLoading, datauzenet } = this.state;
+        const storeData = async (value) => {
+            alert(value)
+            try {
+              await AsyncStorage.setItem('@bejelentkezve', value)
+            } catch (e) {
+              // saving error
+            }
+          }
+        
         return (
             <ScrollView style={{
                 flex: 1,
             }}>
-                <View style={{ flex: 1, minHeight: 400, backgroundColor: "red" }} />
+                <View style={{ flex: 1, minHeight: 400, backgroundColor: "red" }}>
+                    <TouchableOpacity onPress={() => storeData("nem")}>
+                        <Text>Kijelentkezes</Text>
+                    </TouchableOpacity>
+                </View>
                 <View style={{ flex: 1, minHeight: 400, backgroundColor: "green" }} />
                 <View style={{ flex: 1, minHeight: 400, backgroundColor: "blue" }} />
                 <View style={{ flex: 1, minHeight: 400, backgroundColor: "red" }} />
