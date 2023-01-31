@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, ScrollView, View, Text, FlatList, ActivityIndicator, Pressable, Image, TouchableOpacity } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 const IP = require('../pages/IPcim')
 
 
@@ -38,35 +39,35 @@ export default class App extends Component {
         const storeData = async (value) => {
             alert(value)
             try {
-              await AsyncStorage.setItem('@bejelentkezve', value)
+                await AsyncStorage.setItem('@bejelentkezve', value)
             } catch (e) {
-              // saving error
+                // saving error
             }
-          }
-        
+        }
+
         return (
             <ScrollView style={{
                 flex: 1,
             }}>
-                <View style={{ flex: 1, minHeight: 400, backgroundColor: "red" }}>
+                <View style={{ flex: 1, minHeight: 400 }}>
                     <TouchableOpacity onPress={() => storeData("nem")}>
                         <Text>Kijelentkezes</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, minHeight: 400, backgroundColor: "green" }} />
-                <View style={{ flex: 1, minHeight: 400, backgroundColor: "blue" }} />
-                <View style={{ flex: 1, minHeight: 400, backgroundColor: "red" }} />
-                <View style={{ flex: 1, minHeight: 200, backgroundColor: "green" }}>
+                <View style={{ flex: 1, minHeight: 400 }} />
+                <View style={{ flex: 1, minHeight: 400 }} />
+                <View style={{ flex: 1, minHeight: 400 }} />
+                <View style={{ flex: 1, minHeight: 200 }}>
                     <Text>Műfajok</Text>
-                    <ScrollView horizontal style={{ flex: 1}}>
+                    <ScrollView horizontal style={{ flex: 1 }}>
                         {isLoading ? <ActivityIndicator /> : (
                             data.map(item =>
                                 <View style={{
                                     flex: 1, flexDirection: "row", backgroundColor: "green"
                                 }}>
-                                    <Pressable onPress={() => this.props.navigation.navigate('Mufajkonyv',{mufajid:item.mufaj1})} style={{ flex: 1}}>
-                                        <View style={{ flex: 1,}}>
-                                            <Image source={{ uri: IP.ipcim + item.mufaj_kep }} style={{width: 200,margin:5, height: 200,borderRadius:5}} />
+                                    <Pressable onPress={() => this.props.navigation.navigate('Mufajkonyv', { mufajid: item.mufaj1 })} style={{ flex: 1 }}>
+                                        <View style={{ flex: 1, }}>
+                                            <Image source={{ uri: IP.ipcim + item.mufaj_kep }} style={{ width: 200, margin: 5, height: 200, borderRadius: 5 }} />
                                         </View>
                                     </Pressable>
                                 </View>
@@ -74,7 +75,7 @@ export default class App extends Component {
                         )}
                     </ScrollView>
                 </View>
-
+                <StatusBar style="light" />
             </ScrollView>
         );
     }

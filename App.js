@@ -54,11 +54,11 @@ function NotificationsScreen({ navigation }) {
 
 function Root({ navigation }) {
   return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Fooldal" options={{ title: "Főoldal" }} component={Fooldal_lap} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      <Drawer.Screen name="Mindeniro" options={{ title: "Minden író" }} component={Irolista_lap} />
-      <Drawer.Screen name="Profil" options={{ title: "Profilom" }} component={TagProfil_lap} />
+    <Drawer.Navigator initialRouteName="Home"  screenOptions={{headerStyle: { backgroundColor: '#4D0900' }, headerTintColor: '#FFFFFF', drawerStyle: { backgroundColor: '#740101' }, drawerActiveBackgroundColor: "rgb(18,18,18)", drawerActiveTintColor: "white", drawerInactiveTintColor: "white", headerTitleAlign: "center" }}>
+      <Drawer.Screen name="Fooldal" options={{ title: "Főoldal" }}  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={Fooldal_lap} />
+      <Drawer.Screen name="Notifications" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={NotificationsScreen} />
+      <Drawer.Screen name="Mindeniro" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} options={{ title: "Minden író" }} component={Irolista_lap} />
+      <Drawer.Screen name="Profil" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} options={{ title: "Profilom" }} component={TagProfil_lap} />
     </Drawer.Navigator>
   );
 }
@@ -87,22 +87,22 @@ export default function App() {
       setLoading(true);
     }
   }
-  
-    isLogin("@bejelentkezve")
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
 
-          <Stack.Screen name='Mufajkonyv' component={Mufajkonyv} />
-          <Stack.Screen name='KonyvProfil' component={KonyvProfil} />
-          <Stack.Screen name='TagProfil' component={TagProfil} />
-          <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
+  isLogin("@bejelentkezve")
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}}>
+        {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
 
-        </Stack.Navigator>
-      </NavigationContainer>
+        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='Mufajkonyv' component={Mufajkonyv} />
+        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='KonyvProfil' component={KonyvProfil} />
+        <Stack.Screen  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='TagProfil' component={TagProfil} />
+        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
 
-    );
-  
+      </Stack.Navigator>
+    </NavigationContainer>
+
+  );
+
 
 }
