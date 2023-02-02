@@ -50,11 +50,16 @@ export default class App extends Component {
                 flex: 1,
                 backgroundColor: 'rgb(245, 240, 230)'
             }}>
+
+            {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
                 <View style={{ flex: 1, paddingTop: 5 }}>
                     <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 250, width: "90%", borderRadius: 5, alignSelf: 'center' }}>
                         <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Neked ajánljuk</Text>
                     </TouchableOpacity>
                 </View>
+
+            {/* ----------------------------------------------------------------HÁRMAS CSEMPE---------------------------------------------------------------------------------------------------------- */}
+
                 <View style={{ flex: 1, paddingTop: 5, marginBottom: 5 }} >
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
                         <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 200, width: "50%", borderRadius: 5 }}>
@@ -70,16 +75,22 @@ export default class App extends Component {
                         </View>
                     </View>
                 </View>
+            
+            {/* ----------------------------------------------------------------KÖZELGŐ LEJÁRAT---------------------------------------------------------------------------------------------------------- */}
+
                 <View style={{ flex: 1, marginBottom: 10 }}>
-                    {true ? <TouchableOpacity style={{ backgroundColor: "red", height: 100, width: "90%", borderRadius: 5, alignSelf: 'center' }}>
+                    {false ? <TouchableOpacity style={{ backgroundColor: "red", height: 100, width: "90%", borderRadius: 5, alignSelf: 'center' }}>
                         <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
                     </TouchableOpacity> : <TouchableOpacity style={{ backgroundColor: "green", height: 100, width: "90%", borderRadius: 5, alignSelf: 'center' }}>
                         <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
                     </TouchableOpacity>}
 
                 </View>
+
+            {/* ----------------------------------------------------------------MŰFAJOK---------------------------------------------------------------------------------------------------------- */}
+
                 <View style={{ flex: 1, minHeight: 200 }}>
-                    <ScrollView horizontal style={{ flex: 1, backgroundColor: "#f0eded" }} >
+                    <ScrollView horizontal style={{ flex: 1, backgroundColor: "#f0eded",width:"95%",alignSelf:"center" }} >
                         {isLoading ? <ActivityIndicator /> : (
                             data.map(item =>
                                 <View style={{
