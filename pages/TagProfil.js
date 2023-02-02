@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Text, View, Image, Modal, StyleSheet, Pressable, SafeAreaView, ScrollView } from 'react-native';
+import { ActivityIndicator, Text, View, Image, Modal, StyleSheet, TouchableOpacity, Pressable, SafeAreaView, ScrollView } from 'react-native';
 const IP = require('../pages/IPcim')
 export default class App extends Component {
     constructor(props) {
@@ -11,7 +11,8 @@ export default class App extends Component {
             katt: true,
             datauzenet: [],
             datauzenet2: [],
-            tagprofil: '0'
+            tagprofil: '0',
+            modalVisible: false,
         };
     }
     tobb = () => {
@@ -100,7 +101,7 @@ export default class App extends Component {
 
 
     render() {
-        const { data, katt, isLoading, datauzenet, datauzenet2 } = this.state;
+        const { data, katt, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
 
         return (
             <SafeAreaView style={{ flex: 1 }}>
@@ -118,38 +119,43 @@ export default class App extends Component {
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet2.map(item =>
                             <View style={{ flex: 1, backgroundColor: 'white' }}>
-                                <Pressable onPress={() => this.updateFoglalas(item.tp_id, item.k_id)}>
-                                    <Text>{item.k_id}</Text>
-                                    <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_kezdet.substring(0, 10) + "-től " + item.k_lejar.substring(0, 10) + "-ig"}</Text>
-                                    <Text>Módosit</Text>
+
+                                <Text>{item.k_id}</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_kezdet.substring(0, 10) + "-től " + item.k_lejar.substring(0, 10) + "-ig"}</Text>
+                                <Pressable
+                                    style={[styles.button, styles.buttonOpen]}
+                                    onPress={() => this.setState({ modalVisible: true })}>
+                                    <Text>Módosít</Text>
                                 </Pressable>
                             </View>
                         )
                     )}
                     <Modal
                         animationType="slide"
-                        transparent={true}
                         visible={modalVisible}
                         onRequestClose={() => {
                             Alert.alert('Modal has been closed.');
                             this.setState({ modalVisible: !modalVisible });
                         }}>
                         <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <Text style={styles.modalText}>Hello World!</Text>
-                                <Pressable
-                                    style={[styles.button, styles.buttonClose]}
-                                    onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                    <Text style={styles.textStyle}>Hide Modal</Text>
-                                </Pressable>
+                            <View style={{ alignSelf: 'center', width: 400 }}>
+                                <View style={{ flex: 1, paddingTop: 15,alignSelf: 'center', marginBottom: 15 }} >
+                                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
+                                        <Pressable
+                                            style={[styles.button, styles.buttonClose], { backgroundColor: "red", width: "30%", height: 50, borderRadius: 10 }}
+                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
+                                            <Text style={{ alignSelf: 'center' }}>Mégsem</Text>
+                                        </Pressable>
+                                        <Pressable
+                                            style={[styles.button, styles.buttonClose], { backgroundColor: "green", width: "30%", height: 50, borderRadius: 10 }}
+                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
+                                            <Text style={{ alignSelf: 'center' }}>Módosít</Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
                             </View>
                         </View>
                     </Modal>
-                    <Pressable
-                        style={[styles.button, styles.buttonOpen]}
-                        onPress={() => this.setState({ modalVisible: true })}>
-                        <Text style={styles.textStyle}>Show Modal</Text>
-                    </Pressable>
                 </ScrollView>
             </SafeAreaView>
         );

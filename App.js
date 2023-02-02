@@ -55,7 +55,7 @@ function NotificationsScreen({ navigation }) {
 function Root({ navigation }) {
   return (
     <Drawer.Navigator initialRouteName="Home"  screenOptions={{headerStyle: { backgroundColor: '#4D0900' }, headerTintColor: '#FFFFFF', drawerStyle: { backgroundColor: '#740101' }, drawerActiveBackgroundColor: "rgb(18,18,18)", drawerActiveTintColor: "white", drawerInactiveTintColor: "white", headerTitleAlign: "center" }}>
-      <Drawer.Screen name="Fooldal" options={{ title: "Főoldal" }}  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={Fooldal_lap} />
+      <Drawer.Screen name="Fooldal" options={{ title: "KönyvtárGO" }}  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={Fooldal_lap} />
       <Drawer.Screen name="Notifications" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={NotificationsScreen} />
       <Drawer.Screen name="Mindeniro" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} options={{ title: "Minden író" }} component={Irolista_lap} />
       <Drawer.Screen name="Profil" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} options={{ title: "Profilom" }} component={TagProfil_lap} />
