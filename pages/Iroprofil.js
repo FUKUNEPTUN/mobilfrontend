@@ -82,16 +82,17 @@ export default class App extends Component {
     const { data, katt, isLoading, datauzenet, datauzenet2 } = this.state;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1,backgroundColor: 'rgb(245, 240, 230)'}}>
         <FlatList
           data={datauzenet}
           renderItem={({ item }) => (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 ,paddingTop:"5%" }}>
               <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center', borderRadius: 75 }} />
               <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
               <Pressable onPress={() => this.tobb()}>
-                {this.state.katt ? <Text style={{ fontSize: 15, margin: 15, paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center' }}>{item.iro_leiras.substring(0, 300)} ...Tovább</Text> : <Text style={{ fontSize: 15, margin: 15, paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center' }}>{item.iro_leiras}</Text>}
+                {this.state.katt ? <Text style={{ fontSize: 15,width:"90%", paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center' }}>{item.iro_leiras.substring(0, 300)} ...Tovább</Text> : <Text style={{ fontSize: 15, paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center',width:"90%" }}>{item.iro_leiras}</Text>}
               </Pressable>
+              <View style={{backgroundColor:"#ede4d1"}}>
               <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15 }}>Könyvei</Text>
               <FlatList
                 data={datauzenet2}
@@ -101,9 +102,8 @@ export default class App extends Component {
                     flexDirection: "row"
                   }}>
                     <Pressable onPress={() => this.props.navigation.navigate('KonyvProfil', { iddd: item.kp_id })} style={{ flex: 1 }}>
-                    <View style={{ flex: 1, backgroundColor: "green" }}>
+                    <View style={{ flex: 1, }}>
                       <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15 }}>{item.konyv_cime}</Text>
-                      <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15 }}>{item.kp_id}</Text>
                       <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 200, alignSelf: 'center' }} />
                     </View>
                     </Pressable>
@@ -111,6 +111,7 @@ export default class App extends Component {
                   </View>
                 )}
               />
+              </View>
             </View>
           )}
         />
