@@ -63,14 +63,14 @@ export default class App extends Component {
                 <View style={{ flex: 1, paddingTop: 5, marginBottom: 5 }} >
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
                         <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 200, width: "50%", borderRadius: 5 }}>
-                            <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Minden író</Text>
+                            <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>hármas csempe 1</Text>
                         </TouchableOpacity>
-                        <View style={{ marginLeft: 5 }}>
-                            <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 96, borderRadius: 5 }}>
+                        <View style={{ marginLeft: 5, width:"49%" }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "#C0C0C0", height: 96, borderRadius: 5 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Minden író</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 96, marginTop: 8, borderRadius: 5 }}>
-                                <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Minden író</Text>
+                                <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>hármas csempe 3</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

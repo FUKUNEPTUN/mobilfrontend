@@ -101,7 +101,7 @@ export default class App extends Component {
                     flex: 1,
                     flexDirection: "row"
                   }}>
-                    <Pressable onPress={() => this.props.navigation.navigate('KonyvProfil', { iddd: item.kp_id })} style={{ flex: 1 }}>
+                    <Pressable onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })} style={{ flex: 1 }}>
                     <View style={{ flex: 1, }}>
                       <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15 }}>{item.konyv_cime}</Text>
                       <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 200, alignSelf: 'center' }} />
