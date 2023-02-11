@@ -11,7 +11,10 @@ import KonyvProfil from './pages/KonyvProfil';
 import TagProfil from './pages/TagProfil';
 import Loading from './pages/Loading'
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 function HomeScreen({ navigation }) {
   return (
@@ -54,13 +57,46 @@ function NotificationsScreen({ navigation }) {
 
 function Root({ navigation }) {
   return (
-    <Drawer.Navigator initialRouteName="Home"  screenOptions={{headerStyle: { backgroundColor: '#4D0900' }, headerTintColor: '#FFFFFF', drawerStyle: { backgroundColor: '#740101' }, drawerActiveBackgroundColor: "rgb(18,18,18)", drawerActiveTintColor: "white", drawerInactiveTintColor: "white", headerTitleAlign: "center" }}>
-      <Drawer.Screen name="Fooldal" options={{ title: "KönyvtárGO" }}  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} component={Fooldal_lap} />
-      <Drawer.Screen name="Profil" screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} options={{ title: "Profilom" }} component={TagProfil_lap} />
-    </Drawer.Navigator>
+    <Tab.Navigator initialRouteName="Home" screenOptions={{
+      headerShown: false,
+      headerTitleAlign: "center",
+      tabBarStyle: {
+        height: "7%",
+        paddingHorizontal: 5,
+        paddingTop: 0,
+        backgroundColor: '#4D0900',
+        position: 'absolute',
+        borderTopWidth: 0,
+      },
+    }} >
+      <Tab.Screen name="Fooldal" options={{
+        tabBarLabel: 'KönyvtárGO',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" color={color} size={size} />
+        ),
+      }} component={Fooldal_lap} />
+
+<Tab.Screen name="Search" options={{
+        tabBarLabel: 'Keresés',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="book-search" color={color} size={size} />
+        ),
+      }} component={Fooldal_lap} />
+
+      <Tab.Screen name="Profil"
+      options={{
+        tabBarLabel: 'Profilom',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="account" color={color} size={size} />
+        ),
+      }}
+      
+      
+      component={TagProfil_lap} />
+    </Tab.Navigator>
   );
 }
-
+const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator()
 export default function App() {
@@ -89,14 +125,14 @@ export default function App() {
   isLogin("@bejelentkezve")
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}}>
+      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }}>
         {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
 
-        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='Mufajkonyv' component={Mufajkonyv} />
-        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='KonyvProfil' component={KonyvProfil} />
-        <Stack.Screen  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='TagProfil' component={TagProfil} />
-        <Stack.Screen  screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name='Mindenirok' component={Irolista} />
-        <Stack.Screen screenOptions={{headerStyle: { backgroundColor: '#AC0000' }}} name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
+        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900', } }} name='Mufajkonyv' component={Mufajkonyv} />
+        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name='KonyvProfil' component={KonyvProfil} />
+        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name='TagProfil' component={TagProfil} />
+        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' },headerTintColor: '#FFFFFF'  }} name='Mindenirok' component={Irolista} />
+        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
 
       </Stack.Navigator>
     </NavigationContainer>

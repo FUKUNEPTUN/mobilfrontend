@@ -48,7 +48,8 @@ export default class App extends Component {
         return (
             <ScrollView style={{
                 flex: 1,
-                backgroundColor: 'rgb(245, 240, 230)'
+                backgroundColor: 'rgb(245, 240, 230)',
+                paddingTop:45
             }}>
 
             {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
@@ -106,7 +107,7 @@ export default class App extends Component {
                         )}
                     </ScrollView>
                 </View>
-                <StatusBar style="light" />
+                <StatusBar style="dark" />
             </ScrollView>
         );
     }

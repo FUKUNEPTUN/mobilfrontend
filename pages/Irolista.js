@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -39,7 +40,8 @@ export default class App extends Component {
     const { data, isLoading, datauzenet } = this.state;
 
     return (
-      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}>
+      
+      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}><StatusBar style="light" />
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
