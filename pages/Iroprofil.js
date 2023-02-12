@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button, Pressable } from 'react-native';
-import KonyvProfil from './KonyvProfil'
+import KonyvProfil from './Konyvprofil'
 
 const IP = require('../pages/IPcim')
 

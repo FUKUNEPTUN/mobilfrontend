@@ -7,9 +7,10 @@ import Iroprofil from './pages/Iroprofil';
 import Irolista from './pages/Irolista';
 import Fooldal from './pages/Fooldal';
 import Login from './pages/Login';
-import KonyvProfil from './pages/KonyvProfil';
+import KonyvProfil from './pages/Konyvprofil';
 import TagProfil from './pages/TagProfil';
 import Loading from './pages/Loading'
+import Kereses from './pages/Kereses'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,6 +25,11 @@ function HomeScreen({ navigation }) {
 function Loading_lap({ navigation }) {
   return (
     <Loading />
+  );
+}
+function Kereses_lap({ navigation }) {
+  return (
+    <Kereses />
   );
 }
 function Irolista_lap({ navigation }) {
@@ -59,35 +65,50 @@ function Root({ navigation }) {
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{
       headerShown: false,
+      tabBarLabelStyle: {
+        fontSize: 15,
+      },
+      tabBarIconStyle:{
+        size:15
+      },
       headerTitleAlign: "center",
       tabBarStyle: {
-        height: "7%",
+        height: "8%",
+        borderRadius:20,
+        marginBottom:"2%",
+        padding:"2%",
+        paddingBottom:"2%",
+        margin:"3%",
         paddingHorizontal: 5,
         paddingTop: 0,
-        backgroundColor: '#4D0900',
+        backgroundColor: '#0A1A23',
         position: 'absolute',
         borderTopWidth: 0,
       },
     }} >
       <Tab.Screen name="Fooldal" options={{
         tabBarLabel: 'KönyvtárGO',
+        tabBarActiveTintColor:"#E6B794",tabBarInactiveTintColor:"white",
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={size} />
+          <MaterialCommunityIcons name="home" color={color} size={32} />
         ),
       }} component={Fooldal_lap} />
 
 <Tab.Screen name="Search" options={{
         tabBarLabel: 'Keresés',
+        tabBarActiveTintColor:"#E6B794",tabBarInactiveTintColor:"white",
+        
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="book-search" color={color} size={size} />
+          <MaterialCommunityIcons name="book-search" color={color} size={32} />
         ),
-      }} component={Fooldal_lap} />
+      }} component={Kereses_lap} />
 
       <Tab.Screen name="Profil"
       options={{
         tabBarLabel: 'Profilom',
+        tabBarActiveTintColor:"#E6B794",tabBarInactiveTintColor:"white",
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="account" color={color} size={size} />
+          <MaterialCommunityIcons name="account" color={color} size={37} />
         ),
       }}
       
@@ -125,14 +146,14 @@ export default function App() {
   isLogin("@bejelentkezve")
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }}>
+      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0A1A23', },headerTintColor: '#FFFFFF'  }}>
         {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
 
-        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900', } }} name='Mufajkonyv' component={Mufajkonyv} />
-        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name='KonyvProfil' component={KonyvProfil} />
-        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name='TagProfil' component={TagProfil} />
-        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' },headerTintColor: '#FFFFFF'  }} name='Mindenirok' component={Irolista} />
-        <Stack.Screen screenOptions={{ headerStyle: { backgroundColor: '#4D0900' } }} name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
+        <Stack.Screen name='Mufajkonyv' component={Mufajkonyv} options={{ title: "Könyvek" }}/>
+        <Stack.Screen name='KonyvProfil' component={KonyvProfil} options={{ title: "Író profilja" }}/>
+        <Stack.Screen name='TagProfil' component={TagProfil} options={{ title: "Profilom" }}/>
+        <Stack.Screen name='Mindenirok' component={Irolista} options={{ title: "Minden író" }}/>
+        <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
 
       </Stack.Navigator>
     </NavigationContainer>
