@@ -30,45 +30,45 @@ export default class App extends Component {
     this.getMovies();
   }
 
-  kattintas = () => { 
-   
-       //alert(this.state.keres)
+  kattintas = () => {
 
-       var bemenet={
-        bevitel1:this.state.keres
-       
-      }
-fetch(IP.ipcim+'osszeskereso', {
-    method: "POST",
-    body: JSON.stringify(bemenet),
-    headers: {"Content-type": "application/json; charset=UTF-8"}
-  }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      //alert(JSON.stringify(responseJson))
-      this.setState({
-   
-        data: responseJson,
-      }, function(){
+    //alert(this.state.keres)
 
+    var bemenet = {
+      bevitel1: this.state.keres
+
+    }
+    fetch(IP.ipcim + 'osszeskereso', {
+      method: "POST",
+      body: JSON.stringify(bemenet),
+      headers: { "Content-type": "application/json; charset=UTF-8" }
+    }
+    )
+      .then((response) => response.json())
+      .then((responseJson) => {
+        //alert(JSON.stringify(responseJson))
+        this.setState({
+
+          data: responseJson,
+        }, function () {
+
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
       });
+  }
 
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
-      }
-    
-  
+
 
   render() {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1,paddingTop:"10%", marginTop: 5, backgroundColor: 'rgb(245, 240, 230)' }}>
+      <View style={{ flex: 1, padding: 24, marginTop: 5, backgroundColor: 'rgb(245, 240, 230)' }}>
         <TextInput
-          style={{ height: 40, fontSize: 30,textAlign:'center' }}
+          style={{ height: 40, fontSize: 30, textAlign: 'center' }}
           placeholder="keress könyvet!"
           onChangeText={(beirtszoveg) => this.setState({ keres: beirtszoveg })}
           value={this.state.keres}
@@ -77,8 +77,11 @@ fetch(IP.ipcim+'osszeskereso', {
           style={{ backgroundColor: "blue", margin: 5 }}
           onPress={() => this.kattintas()}
         >
-          <Text style={{color:'white',textAlign:'center',fontSize:20}}>Keresés</Text>
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>Keresés</Text>
         </TouchableOpacity>
+
+
+        
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
@@ -86,10 +89,10 @@ fetch(IP.ipcim+'osszeskereso', {
             renderItem={({ item }) => (
               <View style={{ marginBottom: 10 }}>
                 <Text style={{ fontSize: 35, color: 'darkred', textAlign: 'center' }}>{item.konyv_cime}</Text>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Konyvprofil', {konyvid: item.kp_id})}>
-                <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 225, alignSelf: 'center',borderRadius:5 }} />
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })}>
+                  <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 225, alignSelf: 'center', borderRadius: 5 }} />
                 </TouchableOpacity>
-              
+
               </View>
             )}
           />

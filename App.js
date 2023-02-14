@@ -29,7 +29,7 @@ function Loading_lap({ navigation }) {
 }
 function Kereses_lap({ navigation }) {
   return (
-    <Kereses />
+    <Kereses navigation={navigation}/>
   );
 }
 function Irolista_lap({ navigation }) {

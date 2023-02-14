@@ -104,16 +104,17 @@ export default class App extends Component {
         const { data, katt, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
 
         return (
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={{ flex: 1,paddingTop:45 }}>
                 <ScrollView>
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet.map(item =>
                             <View style={{ flex: 1 }}>
                                 <Image source={{ uri: IP.ipcim + item.tp_profkep }} style={{ width: 220, height: 220, alignSelf: 'center', borderRadius: 150 }} />
-                                <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15 }}>{item.tp_felhasznalonev}</Text>
-                                <Text style={{ textAlign: 'center', fontSize: 25, color: 'grey', paddingBottom: 15 }}>{item.tp_nev}</Text></View>
+                                <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 5 }}>{item.tp_felhasznalonev}</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 25, color: 'grey', paddingBottom: 5}}>{item.tp_nev}</Text></View>
                         )
                     )}
+                    {/* ------------------------------------------------------------Foglalások----------------------------------------------------------------------------- */}
                     <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>kölcsönzéseid</Text>
 
                     {isLoading ? <ActivityIndicator /> : (
