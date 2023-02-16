@@ -1,7 +1,8 @@
 // Szükséges komponensek importálása
 import React, { Component } from 'react';
-import { FlatList, Text, View, Image, StyleSheet, Button, Pressable, Modal } from 'react-native';
+import { FlatList, Text, View, Image, StyleSheet, Button, Pressable, Modal, SafeAreaView} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { StatusBar } from 'expo-status-bar';
 
 // IP cím importálása
 const IP = require('./IPcim');
@@ -22,8 +23,8 @@ export default class App extends Component {
             date: new Date(),
             date2: new Date(),
             datum: "",
-            show:false,
-            show2:false
+            show: false,
+            show2: false
         };
     }
     tobb = () => {
@@ -61,13 +62,13 @@ export default class App extends Component {
 
     felvitel = async () => {
         alert("Sikeres Felvitel")
-        
+
         //uzenet backend végpont meghívása
         try {
             let adatok = {
                 bevitel1: this.state.date2,
                 bevitel2: this.state.konyvid,
-                
+
 
 
             }
@@ -87,7 +88,7 @@ export default class App extends Component {
         } finally {
             this.setState({ isLoading: false });
             this.setState({ modalVisible: false });
-            
+
         }
         this.konyv(this.props.route.params.konyvid)
     }
@@ -148,47 +149,44 @@ export default class App extends Component {
         const { data, katt, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
 
         return (
-            <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}>
+            <SafeAreaView style={{ backgroundColor: 'rgb(245, 240, 230)', height: '100%' }}>
+                                    <StatusBar style="light" />
+
                 <FlatList
                     data={datauzenet}
                     renderItem={({ item }) => (
-                        <View style={{
-                            flex: 1,
-                            flexDirection: "row"
-                        }}>
-                            <View>
-                                <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15, fontWeight: 'bold' }}>{item.konyv_cime}</Text>
-                                <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 200, height: 300, alignSelf: 'center',borderRadius:5 }} />
-                                <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15, fontWeight: 'bold' }}>{item.kp_leiras}</Text>
-                                {/* Modal */}
-                                <Modal
-                                    animationType="fade"
-                                    transparent={true}
-                                    visible={this.state.modalVisible}
-                                    onRequestClose={() => {
-                                        Alert.alert('Modal has been closed.');
-                                        this.setState({ modalVisible: !modalVisible });
-                                    }}>
-                                    <View style={styles.centeredView}>
-                                        <View style={styles.modalView}>
-                                            {/*<Button onPress={this.magyarul} title="Dátumlog" />*/}
-                                            
-                                            <Button onPress={this.showDatepicker2} title="Ettől" />
-                                            <Text style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "grey", textAlign: "center", width: 200, margin: 10, padding: 10 }}>
-                                                {this.state.date2.getFullYear() + "/" + (this.state.date2.getMonth() + 1) + "/" + this.state.date2.getDate()}
-                                            </Text>
+                        <View style={{paddingTop:"2%"}}>
+                            <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 250, alignSelf: 'center', borderRadius: 5 }} />
+                            <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15, fontWeight: 'bold' }}>{item.konyv_cime}</Text>
+                            <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15, fontWeight: 'bold' }}>{item.kp_leiras}</Text>
+                            {/* Modal */}
+                            <Modal
+                                animationType="fade"
+                                transparent={false}
+                                visible={this.state.modalVisible}
+                                onRequestClose={() => {
+                                    this.setState({ modalVisible: !modalVisible });
+                                }}>
+                                <View style={styles.centeredView}>
+                                    <View style={styles.modalView}>
+                                        {/*<Button onPress={this.magyarul} title="Dátumlog" />*/}
 
-                                            {this.state.show2 && (
-                                                <DateTimePicker
-                                                    testID="dateTimePicker2"
-                                                    value={this.state.date2}
-                                                    mode="date"
-                                                    is24Hour={true}
-                                                    onChange={this.onChange2}
-                                                    minimumDate={new Date()}
-                                                />
-                                            )}
-{/************************************  +1 DATETIMEPICKER HA KÉNE
+                                        <Button onPress={this.showDatepicker2} title="Ettől" />
+                                        <Text style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "grey", textAlign: "center", width: 200, margin: 10, padding: 10 }}>
+                                            {this.state.date2.getFullYear() + "/" + (this.state.date2.getMonth() + 1) + "/" + this.state.date2.getDate()}
+                                        </Text>
+
+                                        {this.state.show2 && (
+                                            <DateTimePicker
+                                                testID="dateTimePicker2"
+                                                value={this.state.date2}
+                                                mode="date"
+                                                is24Hour={true}
+                                                onChange={this.onChange2}
+                                                minimumDate={new Date()}
+                                            />
+                                        )}
+                                        {/************************************  +1 DATETIMEPICKER HA KÉNE
                                             <Button onPress={this.showDatepicker} title="Eddig" />
                                             <Text style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "grey", textAlign: "center", width: 200, margin: 10, padding: 10 }}>
                                                 {this.state.date.getFullYear() + "/" + (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate()}
@@ -204,31 +202,30 @@ export default class App extends Component {
                                                     
                                                 />
                                             )}
-**************************************/}
-                                            <Pressable
-                                                style={[styles.button, styles.buttonClose]}
-                                                onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                                <Text style={styles.textStyle}>Mégse</Text>
-                                            </Pressable>
-                                            
-                                            <Pressable
-                                                style={[styles.button, styles.buttonClose]}
-                                                onPress={() => this.felvitel()}>
-                                                <Text style={styles.textStyle}>Foglalás</Text>
-                                            </Pressable>
-                                        </View>
+                                            **************************************/}
+                                        <Pressable
+                                            style={[styles.button, styles.buttonClose]}
+                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
+                                            <Text style={styles.textStyle}>Mégse</Text>
+                                        </Pressable>
+
+                                        <Pressable
+                                            style={[styles.button, styles.buttonClose]}
+                                            onPress={() => this.felvitel()}>
+                                            <Text style={styles.textStyle}>Foglalás</Text>
+                                        </Pressable>
                                     </View>
-                                </Modal>
-                                <Pressable
-                                    style={[styles.button, styles.buttonOpen]}
-                                    onPress={() => this.setState({ modalVisible: true })}>
-                                    <Text style={styles.textStyle}>Kölcsönzés</Text>
-                                </Pressable>
-                            </View>
+                                </View>
+                            </Modal>
                         </View>
                     )}
                 />
-            </View>
+                <Pressable
+                    style={[styles.button, styles.buttonOpen]}
+                    onPress={() => this.setState({ modalVisible: true })}>
+                    <Text style={styles.textStyle}>Kölcsönzés</Text>
+                </Pressable>
+            </SafeAreaView>
         );
     }
 };
@@ -241,7 +238,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         margin: 20,
-        backgroundColor: '#F5F5DC',
+        backgroundColor: 'rgb(245, 240, 230)',
         borderRadius: 20,
         padding: 20,
         alignItems: 'center',
@@ -261,6 +258,8 @@ const styles = StyleSheet.create({
     },
     buttonOpen: {
         backgroundColor: '#2196F3',
+        bottom: 5,
+
     },
     buttonClose: {
         backgroundColor: '#2196F3',

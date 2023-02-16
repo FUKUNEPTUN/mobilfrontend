@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, TextInput, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Button, Pressable } from 'react-native';
-import KonyvProfil from './Konyvprofil'
+import { FlatList, Text, View, Image,  StyleSheet, Pressable } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const IP = require('../pages/IPcim')
-
-
 
 export default class App extends Component {
   constructor(props) {
@@ -90,7 +88,7 @@ export default class App extends Component {
               <Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 300, height: 300, alignSelf: 'center', borderRadius: 75 }} />
               <Text style={{ textAlign: 'center', fontSize: 30, color: 'darkred', paddingBottom: 15 }}>{item.iro_neve}</Text>
               <Pressable onPress={() => this.tobb()}>
-                {this.state.katt ? <Text style={{ fontSize: 15,width:"90%", paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center' }}>{item.iro_leiras.substring(0, 300)} ...Tovább</Text> : <Text style={{ fontSize: 15, paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center',width:"90%" }}>{item.iro_leiras}</Text>}
+                {this.state.katt ? <Text style={{ fontSize: 15,width:"90%", paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center' }}>{item.iro_leiras.substring(0, 300)} ...Tovább</Text> : <Text style={{  fontSize: 15,width:"90%", paddingBottom: 15, alignSelf: 'center', textAlignVertical: 'center'  }}>{item.iro_leiras}</Text>}
               </Pressable>
               <View style={{backgroundColor:"#ede4d1"}}>
               <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15 }}>Könyvei</Text>
@@ -115,7 +113,10 @@ export default class App extends Component {
             </View>
           )}
         />
+                        <StatusBar style="light" />
+
       </View>
+      
     );
   }
 };

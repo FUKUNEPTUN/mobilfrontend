@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, ScrollView, View, Text, FlatList, ActivityIndicator, Pressable, Image, TouchableOpacity } from 'react-native';
+import {StyleSheet, ScrollView, View, Text, ActivityIndicator, Pressable, Image, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 const IP = require('../pages/IPcim')
 

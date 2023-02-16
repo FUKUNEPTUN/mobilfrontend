@@ -42,6 +42,7 @@ export default class App extends Component {
     return (
       
       <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}><StatusBar style="light" />
+      
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}

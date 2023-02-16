@@ -135,7 +135,6 @@ export default class App extends Component {
                         animationType="slide"
                         visible={modalVisible}
                         onRequestClose={() => {
-                            Alert.alert('Modal has been closed.');
                             this.setState({ modalVisible: !modalVisible });
                         }}>
                         <View style={styles.centeredView}>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View,ScrollView, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View, ScrollView, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
+import { StatusBar } from 'expo-status-bar';
+
 
 
 export default class App extends Component {
@@ -47,16 +49,18 @@ export default class App extends Component {
     const { data, isLoading, datauzenet } = this.state;
 
     return (
-      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}>
+      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)',paddingTop: "4%",}}>
+        <StatusBar style="light" />
+
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={datauzenet}
             renderItem={({ item }) => (
               <View style={{ flex: 1 }}>
-                <Pressable>
-                  <ScrollView>
-                    <View style={{ flex: 1  }}><Image source={{ uri: IP.ipcim + item.kp_kep}} style={{ width:200, height: 300, borderRadius: 5, alignSelf: 'center' }} /></View>
-                    <View style={{ flex: 1 }}><Text style={{fontSize: 20, color: '#4f0101',textAlignVertical:'center',textAlign:'center', height:60 }}>{item.konyv_cime}</Text></View>
+                <Pressable onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })} style={{ flex: 1 }}>
+                  <ScrollView style={{width:"90%",alignSelf:'center'}}>
+                    <View style={{ flex: 1 }}><Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 225, alignSelf: 'center', borderRadius: 5  }} /></View>
+                    <View style={{ flex: 1 }}><Text style={{ fontSize: 30, color: 'darkred', textAlignVertical: 'center', textAlign: 'center'}}>{item.konyv_cime}</Text></View>
                   </ScrollView>
                 </Pressable>
               </View>
