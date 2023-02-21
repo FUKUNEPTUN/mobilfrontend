@@ -55,7 +55,7 @@ export default class App extends Component {
 
             {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
                 <View style={{ flex: 1, paddingTop: '6%' }}>
-                    <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 230, width: "90%", borderRadius: 15, alignSelf: 'center' ,}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Foryou')} style={{ backgroundColor: "#C0C0C0", height: 230, width: "90%", borderRadius: 15, alignSelf: 'center' ,}}>
                         <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Neked ajánljuk</Text>
                     </TouchableOpacity>
                 </View>

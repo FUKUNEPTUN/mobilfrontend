@@ -11,6 +11,7 @@ import KonyvProfil from './pages/Konyvprofil';
 import TagProfil from './pages/TagProfil';
 import Loading from './pages/Loading'
 import Kereses from './pages/Kereses'
+import Foryou from './pages/Foryou'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -52,7 +53,11 @@ function Login_lap({ navigation }) {
     <Login navigation={navigation} />
   );
 }
-
+function Foryou_lap({ navigation }) {
+  return (
+    <Foryou navigation={navigation} />
+  );
+}
 function NotificationsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -154,7 +159,7 @@ export default function App() {
         <Stack.Screen name='TagProfil' component={TagProfil} options={{ title: "Profilom" }}/>
         <Stack.Screen name='Mindenirok' component={Irolista} options={{ title: "Minden író" }}/>
         <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
-
+        <Stack.Screen name="Foryou" component={Foryou} options={{ title: "Neked ajánljuk" }} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -88,7 +88,6 @@ fetch(IP.ipcim+'osszeskereso', {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })}>
                     <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 225, alignSelf: 'center', borderRadius: 5 }} />
                 </TouchableOpacity>
-
             </View>
         )
         )}
