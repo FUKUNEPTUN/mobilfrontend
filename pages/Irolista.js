@@ -49,7 +49,7 @@ export default class App extends Component {
             renderItem={({ item }) => (
               <View style={{ flex: 1 }}>
                 <Pressable onPress={() => this.props.navigation.navigate('Iroprofil', { aktualid: item.iro_id})}>
-                  <View style={{flexDirection: "row",paddingTop:5,paddingBottom:5}}>
+                  <View style={{flexDirection: "row",paddingTop:5,paddingBottom:5,elevation:10}}>
                     <View style={{ flex: 1  }}><Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width:60, height: 60, borderRadius: 75, alignSelf: 'center' }} /></View>
                     <View style={{ flex: 2 }}><Text style={{fontSize: 25, color: '#4f0101',textAlignVertical:'center', height:60 }}>{item.iro_neve}</Text></View>
                   </View>
