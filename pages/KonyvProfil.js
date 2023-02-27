@@ -1,6 +1,6 @@
 // Szükséges komponensek importálása
 import React, { Component } from 'react';
-import { FlatList, Text, View, Image, StyleSheet, Button, Pressable, Modal, SafeAreaView} from 'react-native';
+import { FlatList, Text, View, Image, StyleSheet, Button, Pressable, Modal, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { StatusBar } from 'expo-status-bar';
 
@@ -24,7 +24,8 @@ export default class App extends Component {
             date2: new Date(),
             datum: "",
             show: false,
-            show2: false
+            show2: false,
+            katt: true
         };
     }
     tobb = () => {
@@ -140,8 +141,9 @@ export default class App extends Component {
         this.showMode2('date')
     };
 
-    magyarul = () => {
-        console.log(this.state.date)
+    tobb = () => {
+
+        this.state.katt ? this.setState({ katt: false }) : this.setState({ katt: true })
     }
 
 
@@ -150,81 +152,116 @@ export default class App extends Component {
 
         return (
             <SafeAreaView style={{ backgroundColor: 'rgb(245, 240, 230)', height: '100%' }}>
-                                    <StatusBar style="light" />
+                <StatusBar style="light" />
 
                 <FlatList
                     data={datauzenet}
                     renderItem={({ item }) => (
-                        <View style={{paddingTop:"2%"}}>
-                            <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 150, height: 250, alignSelf: 'center', borderRadius: 5 }} />
-                            <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 15, fontWeight: 'bold' }}>{item.konyv_cime}</Text>
-                            <Text style={{ textAlign: 'center', fontSize: 15, paddingBottom: 15, fontWeight: 'bold' }}>{item.kp_leiras}</Text>
-                            {/* Modal */}
-                            <Modal
-                                animationType="fade"
-                                transparent={false}
-                                visible={this.state.modalVisible}
-                                onRequestClose={() => {
-                                    this.setState({ modalVisible: !modalVisible });
-                                }}>
-                                <View style={styles.centeredView}>
-                                    <View style={styles.modalView}>
-                                        {/*<Button onPress={this.magyarul} title="Dátumlog" />*/}
 
-                                        <Button onPress={this.showDatepicker2} title="Ettől" />
-                                        <Text style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "grey", textAlign: "center", width: 200, margin: 10, padding: 10 }}>
-                                            {this.state.date2.getFullYear() + "/" + (this.state.date2.getMonth() + 1) + "/" + this.state.date2.getDate()}
-                                        </Text>
+                        <ScrollView style={{
+                            flex: 1,
+                            backgroundColor: "#ede4d1",
 
-                                        {this.state.show2 && (
-                                            <DateTimePicker
-                                                testID="dateTimePicker2"
-                                                value={this.state.date2}
-                                                mode="date"
-                                                is24Hour={true}
-                                                onChange={this.onChange2}
-                                                minimumDate={new Date()}
-                                            />
-                                        )}
-                                        {/************************************  +1 DATETIMEPICKER HA KÉNE
-                                            <Button onPress={this.showDatepicker} title="Eddig" />
+                        }}>
+
+                            {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
+                            <View style={{ flex: 1, marginTop: '6%', backgroundColor: 'white', marginBottom: '1%', width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }}>
+                                <Text style={{ textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{item.konyv_cime}</Text>
+                                {item.alcim != ''?<Text style={{ textAlign: 'center', fontSize: 20, paddingBottom: 15, fontWeight: 'bold' }}>{item.alcim}</Text>:<Text style={{height:12}}>{item.alcim}</Text>}
+                                
+                                <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 200, height: 300, alignSelf: 'center', borderRadius: 5 }} />
+
+                                {/* Modal */}
+                                <Modal
+                                    animationType="fade"
+                                    transparent={false}
+                                    visible={this.state.modalVisible}
+                                    onRequestClose={() => {
+                                        this.setState({ modalVisible: !modalVisible });
+                                    }}>
+                                    <View style={styles.centeredView}>
+                                        <View style={styles.modalView}>
+                                            {/*<Button onPress={this.magyarul} title="Dátumlog" />*/}
+
+                                            <Button onPress={this.showDatepicker2} title="Ettől" />
                                             <Text style={{ marginLeft: "auto", marginRight: "auto", backgroundColor: "grey", textAlign: "center", width: 200, margin: 10, padding: 10 }}>
-                                                {this.state.date.getFullYear() + "/" + (this.state.date.getMonth() + 1) + "/" + this.state.date.getDate()}
+                                                {this.state.date2.getFullYear() + "/" + (this.state.date2.getMonth() + 1) + "/" + this.state.date2.getDate()}
                                             </Text>
-                                            {this.state.show && (
+
+                                            {this.state.show2 && (
                                                 <DateTimePicker
-                                                    testID="dateTimePicker"
-                                                    value={this.state.date}
+                                                    testID="dateTimePicker2"
+                                                    value={this.state.date2}
                                                     mode="date"
                                                     is24Hour={true}
-                                                    onChange={this.onChange}
+                                                    onChange={this.onChange2}
                                                     minimumDate={new Date()}
-                                                    
                                                 />
                                             )}
-                                            **************************************/}
-                                        <Pressable
-                                            style={[styles.button, styles.buttonClose]}
-                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                            <Text style={styles.textStyle}>Mégse</Text>
-                                        </Pressable>
+                                            <Pressable
+                                                style={[styles.button, styles.buttonClose]}
+                                                onPress={() => this.setState({ modalVisible: !modalVisible })}>
+                                                <Text style={styles.textStyle}>Mégse</Text>
+                                            </Pressable>
 
-                                        <Pressable
-                                            style={[styles.button, styles.buttonClose]}
-                                            onPress={() => this.felvitel()}>
-                                            <Text style={styles.textStyle}>Foglalás</Text>
-                                        </Pressable>
+                                            <Pressable
+                                                style={[styles.button, styles.buttonClose]}
+                                                onPress={() => this.felvitel()}>
+                                                <Text style={styles.textStyle}>Foglalás</Text>
+                                            </Pressable>
+                                        </View>
                                     </View>
+                                </Modal>
+                                <Pressable
+                                    style={{ backgroundColor: "#15374B", height: 70, borderRadius: 10, marginTop: "2%" }}
+                                    onPress={() => this.setState({ modalVisible: true })}>
+                                    <Text style={{
+
+                                        color: 'white',
+                                        fontSize: 30,
+                                        fontWeight: 'bold',
+                                        textAlign: 'center',
+                                        height: "100%",
+                                        textAlignVertical: 'center'
+                                    }}>Kölcsönzés</Text>
+                                </Pressable>
+                            </View>
+                            {/* ----------------------------------------------------------------HÁRMAS CSEMPE---------------------------------------------------------------------------------------------------------- */}
+
+                            <View style={{ flex: 1, marginTop:15, backgroundColor: 'white', marginBottom: 12, width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }} >
+                                <View style={{ margin: '2%' }}>
+                                    <Text style={{ textAlign: 'left', fontSize: 30, fontWeight: 'bold', paddingBottom: 10, fontWeight: 'bold' }}>Leírás</Text>
+                                    <Pressable onPress={() => this.tobb()}>
+                                        {this.state.katt ? <Text style={{ fontSize: 16, paddingBottom: 15, fontWeight: '800', color: '#5e5e5e' }}>{item.kp_leiras.substring(0, 300)} ...Tovább</Text> : <Text style={{ fontSize: 16, paddingBottom: 15, fontWeight: '800', color: '#5e5e5e' }}>{item.kp_leiras}</Text>}
+                                    </Pressable>
                                 </View>
-                            </Modal>
-                        </View>
+                            </View>
+
+
+                            {/* ----------------------------------------------------------------KÖZELGŐ LEJÁRAT---------------------------------------------------------------------------------------------------------- */}
+
+                            <View style={{ flex: 1, backgroundColor: 'white', marginBottom: 12 }}>
+                                {false ? <TouchableOpacity style={{ backgroundColor: "red", height: 100, width: "90%", borderRadius: 15, alignSelf: 'center' }}>
+                                    <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
+                                </TouchableOpacity> : <TouchableOpacity style={{ backgroundColor: "green", height: 100, width: "90%", borderRadius: 15, alignSelf: 'center', elevation: 6 }}>
+                                    <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
+                                </TouchableOpacity>}
+
+                            </View>
+                            <StatusBar style="light" />
+                        </ScrollView>
+
+                        // <View style={{paddingTop:"2%"}}>
+
+                        //     
+                        //     
+                        //    
+
+
+                        // </View>
                     )}
                 />
-                <Pressable
-                    style={[styles.button, styles.buttonOpen]}
-                    onPress={() => this.setState({ modalVisible: true })}>
-                    <Text style={styles.textStyle}>Kölcsönzés</Text>
-                </Pressable>
+
             </SafeAreaView>
         );
     }
@@ -266,6 +303,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         color: 'white',
+        fontSize: 15,
         fontWeight: 'bold',
         textAlign: 'center',
     },

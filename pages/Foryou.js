@@ -10,61 +10,41 @@ export default class App extends Component {
     this.state = {
       data: [],
       isLoading: true,
+      datauzenet:[],
       keres: ''
     };
   }
 
-  async getMovies() {
+  tagProfil = async (valamiid) => {
+    this.setState({ tagprofil: valamiid })
+    //uzenet backend végpont meghívása
     try {
-      const response = await fetch(IP.ipcim + 'osszes');
-      const json = await response.json();
-      console.log(json)
-      this.setState({ data: json });
+        let adatok = {
+            tagprofilid: valamiid
+        }
+        const response = await fetch(IP.ipcim + 'foryou',
+            {
+                method: "POST",
+                body: JSON.stringify(adatok),
+                headers: { "Content-type": "application/json; charset=UTF-8" }
+            }
+        );
+        const json = await response.json();
+        //alert(JSON.stringify(json))
+        //console.log(json)
+        this.setState({ datauzenet: json });
     } catch (error) {
-      console.log(error);
+        console.log(error);
     } finally {
-      this.setState({ isLoading: false });
+        this.setState({ isLoading: false });
     }
-  }
-
-  componentDidMount() {
-    this.getMovies();
-  }
-
-  kattintas = () => { 
-   
-       //alert(this.state.keres)
-
-       var bemenet={
-        bevitel1:this.state.keres
-       
-      }
-fetch(IP.ipcim+'osszeskereso', {
-    method: "POST",
-    body: JSON.stringify(bemenet),
-    headers: {"Content-type": "application/json; charset=UTF-8"}
-  }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      //alert(JSON.stringify(responseJson))
-      this.setState({
-   
-        data: responseJson,
-      }, function(){
-
-      });
-
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
-      }
-    
-  
+}
+componentDidMount() {
+    this.tagProfil(1)
+}
 
   render() {
-    const { data, isLoading } = this.state;
+    const { data, isLoading,datauzenet } = this.state;
 
     return (
         
@@ -72,7 +52,7 @@ fetch(IP.ipcim+'osszeskereso', {
        <StatusBar style="light" />
         <ScrollView>
         {isLoading ? <ActivityIndicator /> : (
-          data.map(item =>
+          datauzenet.map(item =>
             <View style={{ paddingBottom: 15 }}>
                 <Text style={{ fontSize: 30, color: 'darkred', textAlign: 'center',paddingBottom:10,fontWeight:'bold' }}>{item.konyv_cime}</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })}>

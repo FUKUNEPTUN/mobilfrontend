@@ -63,10 +63,8 @@ export default class App extends Component {
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
                     <View style={{ flex: 1,backgroundColor:"red" }}><Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 100, height: 150, alignSelf: 'center', borderRadius: 5  }} /></View>
                         <View style={{ marginLeft: 10, width:"47%" }}>
-                        <View style={{ flex: 1 }}><Text style={{ color: 'darkred',fontSize:20, textAlignVertical: 'center', textAlign: 'center'}}>{item.konyv_cime}</Text></View>
-                            <TouchableOpacity style={{elevation:6 }}>
-                                <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>hármas csempe 3</Text>
-                            </TouchableOpacity>
+                        <View style={{ flex: 1 }}><Text style={{ color: 'darkred',fontSize:20, textAlignVertical: 'center', textAlign: 'center'}}>{item.konyv_cime}</Text>
+                                <Text style={{fontWeight: '700', fontSize: 15 }}>{item.alcim}</Text></View>
                         </View>
                     </View>
                 </View>
