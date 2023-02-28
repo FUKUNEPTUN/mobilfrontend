@@ -78,7 +78,7 @@ function Root({ navigation }) {
       },
       headerTitleAlign: "center",
       tabBarStyle: {
-        height: "8%",
+        height: 75,
         borderRadius:20,
         marginBottom:"2%",
         padding:"2%",

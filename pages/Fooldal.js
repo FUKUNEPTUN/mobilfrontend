@@ -66,14 +66,14 @@ export default class App extends Component {
 
                 <View style={{ flex: 1, paddingTop: 15, marginBottom: 15 }} >
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
-                        <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 200, width: "50%", borderRadius: 15,elevation:6 }}>
+                        <TouchableOpacity style={{ flex: 1,backgroundColor: "#C0C0C0", height: 200, borderRadius: 15,elevation:6 }}>
                             <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>hármas csempe 1</Text>
                         </TouchableOpacity>
-                        <View style={{ marginLeft: 10, width:"47%" }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "#C0C0C0", height: 95, borderRadius: 15,elevation:6 }}>
+                        <View style={{ marginLeft: 10, flex: 1, }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "#C0C0C0", flex:1, borderRadius: 15,elevation:6 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>Minden író</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: "#C0C0C0", height: 95, marginTop: 10, borderRadius: 15,elevation:6 }}>
+                            <TouchableOpacity style={{ backgroundColor: "#C0C0C0", flex:1, marginTop: 10, borderRadius: 15,elevation:6 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>hármas csempe 3</Text>
                             </TouchableOpacity>
                         </View>

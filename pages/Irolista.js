@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
 import { StatusBar } from 'expo-status-bar';
 
@@ -41,24 +41,26 @@ export default class App extends Component {
 
     return (
       
-      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}><StatusBar style="light" />
-      
+      <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)',paddingBottom:'3%'}}><StatusBar style="light" />
+        
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
             renderItem={({ item }) => (
-              <View style={{ flex: 1 }}>
-                <Pressable onPress={() => this.props.navigation.navigate('Iroprofil', { aktualid: item.iro_id})}>
-                  <View style={{flexDirection: "row",paddingTop:5,paddingBottom:5,elevation:10}}>
-                    <View style={{ flex: 1  }}><Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width:60, height: 60, borderRadius: 75, alignSelf: 'center' }} /></View>
-                    <View style={{ flex: 2 }}><Text style={{fontSize: 25, color: '#4f0101',textAlignVertical:'center', height:60 }}>{item.iro_neve}</Text></View>
-                  </View>
-                  <View style={{
-                    flex: 1, flexDirection: "row"
-                  }}>
-                    
-
-                  </View>
+              <View style={{ flex: 1}}>
+                  <Pressable onPress={() => this.props.navigation.navigate('Iroprofil', { aktualid: item.iro_id})}>
+                  <ScrollView style={{ width: "95%", alignSelf: 'center' }}>
+                    <View style={{ flex: 1,paddingTop:'1%',paddingBottom:"1%", marginBottom: 10,backgroundColor:"white",borderRadius:100,elevation:3}} >
+                      <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
+                        <View style={{ flex: 1 }}><Image source={{ uri: IP.ipcim + item.iro_kep }} style={{ width: 100, height: 100, alignSelf:'flex-end', borderRadius:  300}} /></View>
+                        <View style={{ marginLeft: 10, flex: 3 }}>
+                          <View style={{ flex: 1 }}>
+                            <Text style={{ color: 'darkred', fontSize: 20, textAlignVertical: 'center', textAlign: 'center', flex: 1 }}>{item.iro_neve}</Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </ScrollView>
                 </Pressable>
               </View>
             )}

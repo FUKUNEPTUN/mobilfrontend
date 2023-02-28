@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { FlatList, Text, View, Image, StyleSheet, Button, Pressable, Modal, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { StatusBar } from 'expo-status-bar';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 
 // IP cím importálása
 const IP = require('./IPcim');
@@ -164,11 +167,11 @@ export default class App extends Component {
 
                         }}>
 
-                            {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
+                            {/* -----------------------------------------------------------------Első block--------------------------------------------------------------------------------------------------------- */}
                             <View style={{ flex: 1, marginTop: '6%', backgroundColor: 'white', marginBottom: '1%', width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }}>
                                 <Text style={{ textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{item.konyv_cime}</Text>
-                                {item.alcim != ''?<Text style={{ textAlign: 'center', fontSize: 20, paddingBottom: 15, fontWeight: 'bold' }}>{item.alcim}</Text>:<Text style={{height:12}}>{item.alcim}</Text>}
-                                
+                                {item.alcim != '' ? <Text style={{ textAlign: 'center', fontSize: 20, paddingBottom: 15, fontWeight: 'bold' }}>{item.alcim}</Text> : <Text style={{ height: 12 }}>{item.alcim}</Text>}
+
                                 <Image source={{ uri: IP.ipcim + item.kp_kep }} style={{ width: 200, height: 300, alignSelf: 'center', borderRadius: 5 }} />
 
                                 {/* Modal */}
@@ -226,9 +229,9 @@ export default class App extends Component {
                                     }}>Kölcsönzés</Text>
                                 </Pressable>
                             </View>
-                            {/* ----------------------------------------------------------------HÁRMAS CSEMPE---------------------------------------------------------------------------------------------------------- */}
+                            {/* ----------------------------------------------------------------Leírás---------------------------------------------------------------------------------------------------------- */}
 
-                            <View style={{ flex: 1, marginTop:15, backgroundColor: 'white', marginBottom: 12, width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }} >
+                            <View style={{ flex: 1, marginTop: 15, backgroundColor: 'white', marginBottom: 12, width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }} >
                                 <View style={{ margin: '2%' }}>
                                     <Text style={{ textAlign: 'left', fontSize: 30, fontWeight: 'bold', paddingBottom: 10, fontWeight: 'bold' }}>Leírás</Text>
                                     <Pressable onPress={() => this.tobb()}>
@@ -238,14 +241,22 @@ export default class App extends Component {
                             </View>
 
 
-                            {/* ----------------------------------------------------------------KÖZELGŐ LEJÁRAT---------------------------------------------------------------------------------------------------------- */}
+                            {/* ----------------------------------------------------------------Mufaj,író block---------------------------------------------------------------------------------------------------------- */}
 
-                            <View style={{ flex: 1, backgroundColor: 'white', marginBottom: 12 }}>
-                                {false ? <TouchableOpacity style={{ backgroundColor: "red", height: 100, width: "90%", borderRadius: 15, alignSelf: 'center' }}>
-                                    <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
-                                </TouchableOpacity> : <TouchableOpacity style={{ backgroundColor: "green", height: 100, width: "90%", borderRadius: 15, alignSelf: 'center', elevation: 6 }}>
-                                    <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Közelgő lejárat</Text>
-                                </TouchableOpacity>}
+                            <View style={{ flex: 1, marginTop: 15, backgroundColor: 'white', marginBottom: 12, width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10, height: 200 }}>
+                                <Pressable style={{ flex: 1, flexDirection: 'row' }}  onPress={() => this.props.navigation.navigate('Iroprofil', { aktualid: item.iro_id})}>
+                                    <MaterialCommunityIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={25} name="pencil" color={"grey"} />
+                                    <Text style={{ flex: 5, fontSize: 16,fontWeight: '800', textAlignVertical: 'center' }} >{item.iro_neve}</Text>
+                                </Pressable>
+                                <Pressable style={{ flex: 1, flexDirection: 'row' }} onPress={() => this.props.navigation.navigate('Mufajkonyv', { mufajid: item.mufaj1 })}>
+                                    <MaterialIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={25} name="category" color={"grey"} />
+
+                                    <Text style={{ flex: 5, fontSize: 16,fontWeight: '800', textAlignVertical: 'center' }} >{item.mufaj_nev}</Text>
+                                </Pressable>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <MaterialCommunityIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={25} name="exclamation-thick" color={"grey"} />
+                                    {item.kotelezoolvasmany ? <Text style={{ flex: 5,fontSize: 16,fontWeight: '800', textAlignVertical: 'center' }}>Kötelezőolvasmány</Text> : <Text style={{ flex: 5,fontSize: 16,fontWeight: '800', textAlignVertical: 'center' }}>Nem kötelezőolvasmány</Text>}
+                                </View>
 
                             </View>
                             <StatusBar style="light" />
