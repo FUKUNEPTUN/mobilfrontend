@@ -73,8 +73,8 @@ export default class App extends Component {
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "#C0C0C0", flex:1, borderRadius: 15,elevation:6 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>Minden író</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{ backgroundColor: "#C0C0C0", flex:1, marginTop: 10, borderRadius: 15,elevation:6 }}>
-                                <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>hármas csempe 3</Text>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Kotelezo')} style={{ backgroundColor: "#C0C0C0", flex:1, marginTop: 10, borderRadius: 15,elevation:6 }}>
+                                <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>Kötelező olvasmányok</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

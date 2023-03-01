@@ -9,9 +9,10 @@ import Fooldal from './pages/Fooldal';
 import Login from './pages/Login';
 import KonyvProfil from './pages/Konyvprofil';
 import TagProfil from './pages/TagProfil';
-import Loading from './pages/Loading'
-import Kereses from './pages/Kereses'
-import Foryou from './pages/Foryou'
+import Loading from './pages/Loading';
+import Kereses from './pages/Kereses';
+import Foryou from './pages/Foryou';
+import Kotelezo from './pages/Kotelezo'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,6 +57,11 @@ function Login_lap({ navigation }) {
 function Foryou_lap({ navigation }) {
   return (
     <Foryou navigation={navigation} />
+  );
+}
+function Kotelezo_lap({ navigation }) {
+  return (
+    <Kotelezo navigation={navigation} />
   );
 }
 function NotificationsScreen({ navigation }) {
@@ -160,6 +166,7 @@ export default function App() {
         <Stack.Screen name='Mindenirok' component={Irolista} options={{ title: "Minden író" }}/>
         <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
         <Stack.Screen name="Foryou" component={Foryou} options={{ title: "Neked ajánljuk" }} />
+        <Stack.Screen name="Kotelezo" component={Kotelezo} options={{ title: "Kötelező olvasmányok" }} />
       </Stack.Navigator>
     </NavigationContainer>
 
