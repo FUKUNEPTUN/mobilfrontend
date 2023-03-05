@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, FlatList, Text, View, ScrollView, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
+import { Text, View, Image, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 const IP = require('../pages/IPcim')
 export default class App extends Component {
     constructor(props) {
@@ -17,9 +17,9 @@ export default class App extends Component {
         const { data, isLoading, datauzenet } = this.state;
 
         return (
-            <View style={{ flex: 1, backgroundColor: 'rgb(245, 240, 230)' }}>
-                <Text style={{ alignSelf: 'center', paddingTop: 150 }}>
-                    TÖLTÖK        </Text>
+            <View style={{ flex: 1, backgroundColor: '#f5f0e6',paddingVertical:"35%"}}>
+                <Image source={require('../assets/pics/konyvtargo.gif')} style={{width:350,height:350,alignSelf:'center'}} />
+                <Text style={{textAlign:"center",fontSize:50,fontWeight:'800'}}>Töltés </Text>
             </View>
         );
     }

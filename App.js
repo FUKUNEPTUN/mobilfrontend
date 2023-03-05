@@ -158,7 +158,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#0A1A23', },headerTintColor: '#FFFFFF'  }}>
-        {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap' component={Loading_lap} />}
+        {isLoading ? isLogin1 ? <Stack.Screen name="Roo2t" component={Login_lap} options={{ headerShown: false }} /> : <Stack.Screen name="Root" component={Root} options={{ headerShown: false }} /> : <Stack.Screen name='Loading_lap'  options={{ headerShown: false }} component={Loading_lap} />}
 
         <Stack.Screen name='Mufajkonyv' component={Mufajkonyv} options={{ title: "Könyvek" }}/>
         <Stack.Screen name='KonyvProfil' component={KonyvProfil} options={{ title: "Könyv profilja" }}/>
