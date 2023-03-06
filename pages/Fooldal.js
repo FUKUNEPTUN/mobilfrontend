@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, ScrollView, View, Text, ActivityIndicator, Pressable, Image, TouchableOpacity } from 'react-native';
+import {StyleSheet, ScrollView, View, Text, ActivityIndicator, Pressable, Image, TouchableOpacity, Alert, BackHandler } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 const IP = require('../pages/IPcim')
 
 
 export default class App extends Component {
+
+    
     constructor(props) {
         super(props);
 
@@ -16,7 +18,28 @@ export default class App extends Component {
             iroid: 0
         };
     }
+    handleBackPress(){
+        Alert.alert(
+            'Kilépés',
+            'Tényleg ki akarsz lépni?',
+            [
+                {
+                    text:'mégsem',
+                    onPress:()=>{
+                        console.log('cancel pressed')
+                    }
+                },
+                {
+                    text:'Igen',
+                    onPress:()=>BackHandler.exitApp(),
+                },
+            ],
+            {
+            cancelable:false},
 
+        )
+        return true;
+    }
     async getMindenMufaj() {
         try {
             this.setState({ isLoading: true })
@@ -32,7 +55,9 @@ export default class App extends Component {
 
     componentDidMount() {
         this.getMindenMufaj();
+        BackHandler.addEventListener('hardwareBackPress',this.handleBackPress)
     }
+
 
     render() {
         const { data, isLoading, datauzenet } = this.state;
