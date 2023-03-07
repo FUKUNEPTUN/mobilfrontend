@@ -73,6 +73,7 @@ function NotificationsScreen({ navigation }) {
 }
 
 function Root({ navigation }) {
+  
   return (
     <Tab.Navigator initialRouteName="Root" screenOptions={{
       headerShown: false,
@@ -133,8 +134,10 @@ const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator()
 export default function App() {
+  
   const [isLoading, setLoading] = useState(false);
   const [isLogin1, setLogin1] = useState(false);
+  
   const isLogin = async (isLogin) => {
     try {
       const value = await AsyncStorage.getItem(isLogin)
@@ -143,7 +146,7 @@ export default function App() {
 
           setLogin1(false)
         }
-        else {
+        else {r
           setLogin1(true)
         }
       }

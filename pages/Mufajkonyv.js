@@ -56,13 +56,6 @@ export default class App extends Component {
             data={datauzenet}
             renderItem={({ item }) => (
               <View style={{ flex: 1 }}>
-                <View style={{ flex: 1, marginTop: 15, backgroundColor: 'white', marginBottom: 12, width: '90%', alignSelf: 'center', borderRadius: 10, elevation: 10 }} >
-                  <View style={{ margin: '2%' }}>
-                    <Text style={{ textAlign: 'left', fontSize: 30, fontWeight: 'bold', paddingBottom: 10, fontWeight: 'bold' }}>Leírás</Text>
-                    <Text>{item.mufaj_leiras}</Text>
-                  </View>
-                </View>
-
                 <Pressable onPress={() => this.props.navigation.navigate('KonyvProfil', { konyvid: item.kp_id })} style={{ flex: 1 }}>
                   <ScrollView style={{ width: "90%", alignSelf: 'center' }}>
                     <View style={{ flex: 1, paddingTop: '1%', paddingBottom: "1%", paddingLeft: '1%', marginBottom: 15, backgroundColor: "white", borderRadius: 10, elevation: 5 }} >

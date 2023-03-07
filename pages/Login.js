@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect } from 'react';
 import { StatusBar, Text, View, Image, TouchableOpacity } from 'react-native';
 const IP = require('../pages/IPcim')
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,7 +13,9 @@ const storeData = async (value) => {
     // saving error
   }
 }
+
 export default class App extends Component {
+
   constructor(props) {
     super(props);
 

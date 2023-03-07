@@ -79,7 +79,7 @@ export default class App extends Component {
                 paddingBottom:"9%"
                 
             }}>
-
+ <StatusBar style="dark" />
             {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
                 <View style={{ flex: 1, paddingTop: '6%' }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Foryou')} style={{ backgroundColor: "#C0C0C0", height: 230, width: "90%", borderRadius: 15, alignSelf: 'center' ,elevation:6}}>
@@ -135,7 +135,7 @@ export default class App extends Component {
                         )}
                     </ScrollView>
                 </View>
-                <StatusBar style="dark" />
+               
             </ScrollView>
         );
     }

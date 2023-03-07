@@ -38,7 +38,7 @@ export default class App extends Component {
 
     konyv = async (valamiid) => {
         this.setState({ konyvid: valamiid })
-        //alert(valamiid)
+        // alert(valamiid)
         //uzenet backend végpont meghívása
         try {
             let adatok = {
