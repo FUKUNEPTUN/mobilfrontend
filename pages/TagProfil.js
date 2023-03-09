@@ -11,6 +11,7 @@ export default class App extends Component {
             katt: true,
             datauzenet: [],
             datauzenet2: [],
+            datauzenet3: [],
             tagprofil: '0',
             modalVisible: false,
         };
@@ -43,6 +44,7 @@ export default class App extends Component {
             this.setState({ isLoading: false });
         }
         this.konyv(valamiid)
+        this.kedvenc(valamiid)
     }
     componentDidMount() {
         this.tagProfil(1)
@@ -64,6 +66,29 @@ export default class App extends Component {
             //alert(JSON.stringify(json))
             //console.log(json)
             this.setState({ datauzenet2: json });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            this.setState({ isLoading: false });
+        }
+    }
+    kedvenc = async (valamiid) => {
+        //uzenet backend végpont meghívása
+        try {
+            let adatok = {
+                tagprofilid: valamiid
+            }
+            const response = await fetch(IP.ipcim + 'kedvenckonyv',
+                {
+                    method: "POST",
+                    body: JSON.stringify(adatok),
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                }
+            );
+            const json = await response.json();
+            //alert(JSON.stringify(json))
+            //console.log(json)
+            this.setState({ datauzenet3: json });
         } catch (error) {
             console.log(error);
         } finally {
@@ -101,25 +126,37 @@ export default class App extends Component {
 
 
     render() {
-        const { data, katt, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
+        const { data, datauzenet3, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
 
         return (
-            <SafeAreaView style={{ flex: 1, paddingTop: 45 }}>
+            <SafeAreaView style={{ flex: 1, paddingTop: 45, backgroundColor: 'rgb(245, 240, 230)', }}>
                 <ScrollView>
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet.map(item =>
-                            <View style={{ flex: 1 }}>
-                                <Image source={{ uri: IP.ipcim + item.tp_profkep }} style={{ width: 220, height: 220, alignSelf: 'center', borderRadius: 150 }} />
+                            <View style={{ flex: 1, backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 10, elevation: 10, padding: 20 }}>
+                                <View style={{ backgroundColor: "white", elevation: 10, borderRadius: 150, width: 150, height: 150, alignSelf: 'center' }}><Image source={{ uri: IP.ipcim + item.tp_profkep }} style={{ alignSelf: 'center', borderRadius: 150, height: 150, width: 150, resizeMode: 'center' }} /></View>
                                 <Text style={{ textAlign: 'center', fontSize: 30, paddingBottom: 5 }}>{item.tp_felhasznalonev}</Text>
                                 <Text style={{ textAlign: 'center', fontSize: 25, color: 'grey', paddingBottom: 5 }}>{item.tp_nev}</Text>
                             </View>
                         )
                     )}
+                    <View style={{ flex: 1, alignSelf: "center", borderRadius: 10, marginTop: 20, backgroundColor: "white", height: 170, width: "90%", elevation: 10 }}>
+                        <Text style={{fontSize:18, fontWeight:"600"}}>
+                            Kedvence műfjaid
+                        </Text>
+                        <View style={{flex:5,flexDirection:"row", }}>
+                            {isLoading ? <ActivityIndicator /> : (
+                                datauzenet3.map(item =>
+                                    <View style={{ flex: 1, alignSelf: "center", borderRadius: 10 }}>
+                                        <View style={{ alignSelf: 'center' }}><Image source={{ uri: IP.ipcim + item.mufaj_kep }} style={{ alignSelf: 'center', height: 115, width: 115,borderRadius:5, resizeMode: 'center' }} /></View>
+                                    </View>
+                                )
+                            )}
+                        </View>
+
+                    </View>
                     {/* ------------------------------------------------------------Foglalások----------------------------------------------------------------------------- */}
                     <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>kölcsönzéseid</Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Roo2t')} style={{ alignSelf: 'center', backgroundColor: "#15374B", minHeight: 50,maxHeight:60, width: "50%", height: "6%", borderRadius: 10, elevation: 6, marginTop: "6%", marginBottom: "3%" }}>
-                        <Text style={{ alignSelf: 'center', height: "100%", textAlignVertical: "center", color: "white", fontSize: 20, fontWeight: "600" }}>Kijelentkezés</Text>
-                    </TouchableOpacity>
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet2.map(item =>
                             <View style={{ flex: 1, backgroundColor: 'white' }}>
