@@ -100,7 +100,9 @@ export default class App extends Component {
     componentDidMount() {
         this.konyv(this.props.route.params.konyvid);
     }
-
+    componentWillUnmount(){
+        this.konyv(this.props.route.params.konyvid)
+    }
 
     onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
