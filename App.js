@@ -12,7 +12,8 @@ import TagProfil from './pages/TagProfil';
 import Loading from './pages/Loading';
 import Kereses from './pages/Kereses';
 import Foryou from './pages/Foryou';
-import Kotelezo from './pages/Kotelezo'
+import Kotelezo from './pages/Kotelezo';
+import Kolcsonzes from './pages/Kolcsonyzes'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,6 +33,11 @@ function Loading_lap({ navigation }) {
 function Kereses_lap({ navigation }) {
   return (
     <Kereses navigation={navigation} />
+  );
+}
+function Kolcsonzes_lap({ navigation }) {
+  return (
+    <Kolcsonzes navigation={navigation} />
   );
 }
 function Irolista_lap({ navigation }) {
@@ -173,6 +179,7 @@ export default function App() {
         <Stack.Screen name="Iroprofil" component={Iroprofil} options={{ title: "Író profilja" }} />
         <Stack.Screen name="Foryou" component={Foryou} options={{ title: "Neked ajánljuk" }} />
         <Stack.Screen name="Kotelezo" component={Kotelezo} options={{ title: "Kötelező olvasmányok" }} />
+        <Stack.Screen name="Kolcsonzes" component={Kolcsonzes} options={{ title: "Kikölcsönzött olvasmányok" }} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -82,7 +82,7 @@ export default class App extends Component {
  <StatusBar style="dark" />
             {/* -----------------------------------------------------------------FOR YOU--------------------------------------------------------------------------------------------------------- */}
                 <View style={{ flex: 1, paddingTop: '6%' }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Foryou')} style={{ backgroundColor: "#C0C0C0", height: 230, width: "90%", borderRadius: 15, alignSelf: 'center' ,elevation:6}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Foryou')} style={{ backgroundColor: "white", height: 230, width: "90%", borderRadius: 15, alignSelf: 'center' ,elevation:6}}>
                         <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>Neked ajánljuk</Text>
                     </TouchableOpacity>
                 </View>
@@ -91,14 +91,14 @@ export default class App extends Component {
 
                 <View style={{ flex: 1, paddingTop: 15, marginBottom: 15 }} >
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
-                        <TouchableOpacity style={{ flex: 1,backgroundColor: "#C0C0C0", height: 200, borderRadius: 15,elevation:6 }}>
+                        <TouchableOpacity style={{ flex: 1,backgroundColor: "white", height: 200, borderRadius: 15,elevation:6 }}>
                             <Text style={{ padding: 20, fontWeight: '700', fontSize: 25 }}>hármas csempe 1</Text>
                         </TouchableOpacity>
                         <View style={{ marginLeft: 10, flex: 1, }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "#C0C0C0", flex:1, borderRadius: 15,elevation:6 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Mindenirok')}  style={{ backgroundColor: "white", flex:1, borderRadius: 15,elevation:6 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>Minden író</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Kotelezo')} style={{ backgroundColor: "#C0C0C0", flex:1, marginTop: 10, borderRadius: 15,elevation:6 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Kotelezo')} style={{ backgroundColor: "white", flex:1, marginTop: 10, borderRadius: 15,elevation:6 }}>
                                 <Text style={{ padding: 20, fontWeight: '700', fontSize: 15 }}>Kötelező olvasmányok</Text>
                             </TouchableOpacity>
                         </View>

@@ -157,7 +157,7 @@ export default class App extends Component {
                         </View>
 
                     </View>
-                    <TouchableOpacity style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "white", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Kolcsonzes')} style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "white", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
                         <View style={{ flex: 4, borderRadius: 10 }}>
                             <Text style={{ height: "100%", textAlignVertical: "center", paddingLeft: 30, fontSize: 20 }}>Kölcsönzéseid</Text>
                         </View>
@@ -165,7 +165,7 @@ export default class App extends Component {
                             <MaterialIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={30} name="arrow-forward-ios" color={"black"} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "#f7a8a8", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Roo2t')} style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "#f7a8a8", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
                         <View style={{ flex: 4, borderRadius: 10 }}>
                             <Text style={{ height: "100%", textAlignVertical: "center", paddingLeft: 30, fontSize: 20 }}>Kijelentkezés</Text>
                         </View>
@@ -176,47 +176,7 @@ export default class App extends Component {
                     <View style={{ height: 200, width: "90%", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
 
                     </View>
-                    {/* ------------------------------------------------------------Foglalások----------------------------------------------------------------------------- */}
-                    {/* <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>kölcsönzéseid</Text>
-                    {isLoading ? <ActivityIndicator /> : (
-                        datauzenet2.map(item =>
-                            <View style={{ flex: 1, backgroundColor: 'white' }}>
-
-                                <Text>{item.k_id}</Text>
-                                <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_kezdet.substring(0, 10) + "-től " + item.k_lejar.substring(0, 10) + "-ig"}</Text>
-                                <Pressable
-                                    style={[styles.button, styles.buttonOpen]}
-                                    onPress={() => this.setState({ modalVisible: true })}>
-                                    <Text>Módosít</Text>
-                                </Pressable>
-                            </View>
-                        )
-                    )}
-                    <Modal
-                        animationType="slide"
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            this.setState({ modalVisible: !modalVisible });
-                        }}>
-                        <View style={styles.centeredView}>
-                            <View style={{ alignSelf: 'center', width: 400 }}>
-                                <View style={{ flex: 1, paddingTop: 15, alignSelf: 'center', marginBottom: 15 }} >
-                                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
-                                        <Pressable
-                                            style={[styles.button, styles.buttonClose], { backgroundColor: "red", width: "30%", height: 50, borderRadius: 10 }}
-                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                            <Text style={{ alignSelf: 'center' }}>Mégsem</Text>
-                                        </Pressable>
-                                        <Pressable
-                                            style={[styles.button, styles.buttonClose], { backgroundColor: "green", width: "30%", height: 50, borderRadius: 10 }}
-                                            onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                            <Text style={{ alignSelf: 'center' }}>Módosít</Text>
-                                        </Pressable>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                    </Modal> */}
+                    
                 </ScrollView>
             </SafeAreaView>
         );
