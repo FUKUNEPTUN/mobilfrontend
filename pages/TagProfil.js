@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Text, View, Image, Modal, StyleSheet, TouchableOpacity, Pressable, SafeAreaView, ScrollView } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 const IP = require('../pages/IPcim')
 export default class App extends Component {
     constructor(props) {
@@ -141,22 +143,41 @@ export default class App extends Component {
                         )
                     )}
                     <View style={{ flex: 1, alignSelf: "center", borderRadius: 10, marginTop: 20, backgroundColor: "white", height: 170, width: "90%", elevation: 10 }}>
-                        <Text style={{fontSize:18, fontWeight:"600"}}>
+                        <Text style={{ fontSize: 18, fontWeight: "600" }}>
                             Kedvence műfjaid
                         </Text>
-                        <View style={{flex:5,flexDirection:"row", }}>
+                        <View style={{ flex: 5, flexDirection: "row", }}>
                             {isLoading ? <ActivityIndicator /> : (
                                 datauzenet3.map(item =>
                                     <View style={{ flex: 1, alignSelf: "center", borderRadius: 10 }}>
-                                        <View style={{ alignSelf: 'center' }}><Image source={{ uri: IP.ipcim + item.mufaj_kep }} style={{ alignSelf: 'center', height: 115, width: 115,borderRadius:5, resizeMode: 'center' }} /></View>
+                                        <View style={{ alignSelf: 'center' }}><Image source={{ uri: IP.ipcim + item.mufaj_kep }} style={{ alignSelf: 'center', height: 115, width: 115, borderRadius: 5, resizeMode: 'center' }} /></View>
                                     </View>
                                 )
                             )}
                         </View>
 
                     </View>
+                    <TouchableOpacity style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "white", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
+                        <View style={{ flex: 4, borderRadius: 10 }}>
+                            <Text style={{ height: "100%", textAlignVertical: "center", paddingLeft: 30, fontSize: 20 }}>Kölcsönzéseid</Text>
+                        </View>
+                        <View style={{ flex: 1, borderRadius: 10 }}>
+                            <MaterialIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={30} name="arrow-forward-ios" color={"black"} />
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ flexDirection: "row", height: 60, width: "90%", elevation: 10, backgroundColor: "#f7a8a8", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
+                        <View style={{ flex: 4, borderRadius: 10 }}>
+                            <Text style={{ height: "100%", textAlignVertical: "center", paddingLeft: 30, fontSize: 20 }}>Kijelentkezés</Text>
+                        </View>
+                        <View style={{ flex: 1, borderRadius: 10 }}>
+                            <MaterialIcons style={{ flex: 1, textAlign: 'center', textAlignVertical: 'center' }} size={30} name="logout" color={"black"} />
+                        </View>
+                    </TouchableOpacity>
+                    <View style={{ height: 200, width: "90%", alignSelf: 'center', marginTop: 20, borderRadius: 10 }}>
+
+                    </View>
                     {/* ------------------------------------------------------------Foglalások----------------------------------------------------------------------------- */}
-                    <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>kölcsönzéseid</Text>
+                    {/* <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>kölcsönzéseid</Text>
                     {isLoading ? <ActivityIndicator /> : (
                         datauzenet2.map(item =>
                             <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -195,7 +216,7 @@ export default class App extends Component {
                                 </View>
                             </View>
                         </View>
-                    </Modal>
+                    </Modal> */}
                 </ScrollView>
             </SafeAreaView>
         );
