@@ -127,7 +127,7 @@ export default class App extends Component {
                                                             <Text style={{ color: 'darkred', fontSize: 20, textAlignVertical: 'bottom', textAlign: 'center', flex: 1 }}>{item.konyv_cime}</Text>
                                                             <Text style={{ fontWeight: '700', fontSize: 15, textAlignVertical: 'top', textAlign: 'center', flex: 1 }}>{item.alcim}</Text>
                                                         </View>}
-                                                    <View style={{ flexDirection: "row",backgroundColor:"#e8e8e8",borderRadius:10 }}>
+                                                    <View style={{ flexDirection: "row", backgroundColor: "#e8e8e8", borderRadius: 10 }}>
                                                         <View style={{ flex: 3 }}>
                                                             <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey' }}>{item.k_kezdet.substring(0, 10) + "-től "}</Text>
                                                             <Text style={{ textAlign: 'center', fontSize: 15, color: 'grey', paddingBottom: 15 }}>{item.k_lejar.substring(0, 10) + "-ig"}</Text>
@@ -148,24 +148,46 @@ export default class App extends Component {
                     )}
                     <StatusBar style="light" />
                     <Modal
-                        animationType="slide"
+                        animationType="fade"
+                        transparent={false}
                         visible={modalVisible}
                         onRequestClose={() => {
                             this.setState({ modalVisible: !modalVisible });
                         }}>
-                        <View style={styles.centeredView}>
-                            <View style={{ alignSelf: 'center', width: 400 }}>
+                        <View style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: 22,
+                        }}>
+                            <View style={{
+                                marginTop:"60%",
+                                backgroundColor: 'white',
+                                borderRadius: 20,
+                                padding: 20,
+                                borderWidth:5,
+                                borderColor:"black",
+                                alignItems: 'center',
+                                shadowColor: '#000',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 4,
+                                elevation: 5,height:300
+                            }}>
+                                <Text style={{ fontSize:20 }}>Tényleg szeretnéd meghosszabbítani a kölcsönzésed 2 héttel?</Text>
                                 <View style={{ flex: 1, paddingTop: 15, alignSelf: 'center', marginBottom: 15 }} >
                                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'center', width: "90%" }} >
                                         <Pressable
-                                            style={[styles.button, styles.buttonClose], { backgroundColor: "red", width: "30%", height: 50, borderRadius: 10 }}
+                                            style={{ backgroundColor: "#f7a8a8", width: "30%", height: 50, borderRadius: 10, marginRight: 15 }}
                                             onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                            <Text style={{ alignSelf: 'center' }}>Mégsem</Text>
+                                            <Text style={{ alignSelf: 'center',height:"100%",textAlignVertical:"center" }}>Mégsem</Text>
                                         </Pressable>
                                         <Pressable
-                                            style={[styles.button, styles.buttonClose], { backgroundColor: "green", width: "30%", height: 50, borderRadius: 10 }}
+                                            style={{ backgroundColor: "#a4e8a2", width: "30%", height: 50, borderRadius: 10 }}
                                             onPress={() => this.setState({ modalVisible: !modalVisible })}>
-                                            <Text style={{ alignSelf: 'center' }}>Módosít</Text>
+                                            <Text style={{ alignSelf: 'center',height:"100%",textAlignVertical:"center" }}>Módosít</Text>
                                         </Pressable>
                                     </View>
                                 </View>

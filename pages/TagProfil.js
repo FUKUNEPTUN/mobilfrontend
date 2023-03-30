@@ -12,7 +12,6 @@ export default class App extends Component {
             isLoading: true,
             katt: true,
             datauzenet: [],
-            datauzenet2: [],
             datauzenet3: [],
             tagprofil: '0',
             modalVisible: false,
@@ -45,34 +44,10 @@ export default class App extends Component {
         } finally {
             this.setState({ isLoading: false });
         }
-        this.konyv(valamiid)
         this.kedvenc(valamiid)
     }
     componentDidMount() {
         this.tagProfil(1)
-    }
-    konyv = async (valamiid) => {
-        //uzenet backend végpont meghívása
-        try {
-            let adatok = {
-                tagprofilid: valamiid
-            }
-            const response = await fetch(IP.ipcim + 'tagprofilkonyv',
-                {
-                    method: "POST",
-                    body: JSON.stringify(adatok),
-                    headers: { "Content-type": "application/json; charset=UTF-8" }
-                }
-            );
-            const json = await response.json();
-            //alert(JSON.stringify(json))
-            //console.log(json)
-            this.setState({ datauzenet2: json });
-        } catch (error) {
-            console.log(error);
-        } finally {
-            this.setState({ isLoading: false });
-        }
     }
     kedvenc = async (valamiid) => {
         //uzenet backend végpont meghívása
@@ -97,38 +72,14 @@ export default class App extends Component {
             this.setState({ isLoading: false });
         }
     }
-    updateFoglalas = async (tagprofilid, kolcsid) => {
-        //uzenet backend végpont meghívása
-        alert(kolcsid)
-        try {
-            let adatok = {
-                tagprofilid: tagprofilid,
-                kolcsid: kolcsid
-            }
-            const response = await fetch(IP.ipcim + 'foglalasupdate',
-                {
-                    method: "POST",
-                    body: JSON.stringify(adatok),
-                    headers: { "Content-type": "application/json; charset=UTF-8" }
-                }
-            );
-            const json = await response.json();
-            // alert(JSON.stringify(json))
 
-        } catch (error) {
-            console.log(error);
-        } finally {
-            this.setState({ isLoading: false });
-            this.konyv(valamiid)
-        }
-    }
     componentDidMount() {
         this.tagProfil(1);
     }
 
 
     render() {
-        const { data, datauzenet3, isLoading, datauzenet, datauzenet2, modalVisible } = this.state;
+        const { data, datauzenet3, isLoading, datauzenet,  modalVisible } = this.state;
 
         return (
             <SafeAreaView style={{ flex: 1, paddingTop: 45, backgroundColor: 'rgb(245, 240, 230)', }}>
